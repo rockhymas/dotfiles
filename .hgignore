@@ -1,0 +1,25 @@
+syntax: glob
+
+# Files
+_viminfo
+NTUSER.DAT
+ntuser.dat.LOG
+ntuser.ini
+
+# Directories
+Application Data
+Cookies
+Desktop
+Favorites
+IETldCache
+Local Settings
+My Documents
+PrivacIE
+Recent
+SendTo
+Start Menu
+Templates
+Tracing
+
+# File Types
+*.swp
