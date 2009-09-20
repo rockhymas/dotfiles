@@ -2,24 +2,33 @@ syntax: glob
 
 # Files
 _viminfo
-NTUSER.DAT
-ntuser.dat.LOG
-ntuser.ini
+NTUSER.*
+ntuser.*
 
 # Directories
+AppData
 Application Data
+Contacts
 Cookies
 Desktop
+Documents
+Downloads
 Favorites
 IETldCache
+Links
 Local Settings
+Music
 My Documents
+Pictures
 PrivacIE
 Recent
+Saved Games
+Searches
 SendTo
 Start Menu
 Templates
 Tracing
+Videos
 
 # File Types
 *.swp
