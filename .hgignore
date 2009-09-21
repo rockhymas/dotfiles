@@ -3,8 +3,7 @@ syntax: glob
 # Files
 _viminfo
 _hgcookies
-NTUSER.*
-ntuser.*
+Sti_Trace.log
 
 # Directories
 AppData
@@ -20,6 +19,7 @@ Links
 Local Settings
 Music
 My Documents
+NetHood
 Pictures
 PrivacIE
 Recent
@@ -32,5 +32,7 @@ Tracing
 Videos
 
 # File Types
+NTUSER.*
+ntuser.*
 *.swp
 *~
