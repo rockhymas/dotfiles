@@ -90,8 +90,3 @@ source $VIMRUNTIME/mswin.vim
 
 set tabstop=4
 set shiftwidth=4
-
-:set guifont=Consolas:h9:cANSI
-go "gmrLt"
-:set lines=150 columns=100
-winpos 0 0
