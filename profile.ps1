@@ -20,4 +20,13 @@ function VsVars32($version = "9.0")
     Get-Batchfile $BatchFile
 }
 
+function prompt
+{
+    Write-Host ("PS " + $(get-location) + '>') -nonewline -foregroundcolor Yellow
+    return " "
+}
+
+
 VsVars32
+[System.Console]::Title = "Console"
+
