@@ -2,6 +2,7 @@ syntax: glob
 
 # Files
 _viminfo
+_hgcookies
 NTUSER.*
 ntuser.*
 
@@ -32,3 +33,4 @@ Videos
 
 # File Types
 *.swp
+*~
