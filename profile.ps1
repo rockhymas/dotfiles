@@ -26,6 +26,12 @@ function prompt
     return " "
 }
 
+function cd.. ([string]$path = ".")
+{
+    Set-Location "..\$path"
+}
+
+New-Alias ".." "cd.."
 
 VsVars32
 [System.Console]::Title = "Console"
