@@ -4,6 +4,7 @@ syntax: glob
 _viminfo
 _hgcookies
 Sti_Trace.log
+.bash_history
 
 # Directories
 AppData
@@ -36,3 +37,5 @@ NTUSER.*
 ntuser.*
 *.swp
 *~
+*.pyc
+*.pyo
