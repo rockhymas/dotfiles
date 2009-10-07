@@ -8,6 +8,7 @@ Sti_Trace.log
 .hgrc
 
 # Directories
+_ReSharper.TempSolution
 AppData
 Application Data
 Contacts
