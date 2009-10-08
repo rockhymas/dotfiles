@@ -26,7 +26,10 @@ function VsVars32($version = "9.0")
 
 function prompt
 {
-    Write-Host ("PS " + $(get-location) + '>') -nonewline -foregroundcolor Yellow
+    hg prompt "{status|modified|unknown}" | Set-Variable status
+    Write-Host ($(get-location)) -nonewline -foregroundcolor Yellow
+    Write-Host ($status) -nonewline -foregroundcolor Cyan
+    Write-Host ('>') -nonewline -foregroundcolor Yellow
     return " "
 }
 
@@ -35,7 +38,7 @@ function cd.. ([string]$path = ".")
     Set-Location "..\$path"
 }
 
-New-Alias ".." "cd.."
+Set-Alias ".." "cd.."
 
 VsVars32
 [System.Console]::Title = "Console"
