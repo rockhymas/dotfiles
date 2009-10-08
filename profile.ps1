@@ -27,8 +27,16 @@ function VsVars32($version = "9.0")
 function prompt
 {
     hg prompt "{status|modified|unknown}" | Set-Variable status
-    Write-Host ($(get-location)) -nonewline -foregroundcolor Yellow
-    Write-Host ($status) -nonewline -foregroundcolor Cyan
+    hg prompt "{root}" | Set-Variable root
+    (get-location).Path | Set-Variable path
+    if (($root -ne $null) -and ($path.Contains($root))) {
+        Write-Host ($root) -nonewline -foregroundcolor Yellow
+        Write-Host ($path.Substring($root.Length) + '\') -nonewline -foregroundcolor Green
+    }
+    else {
+        Write-Host ($path + '\') -nonewline -foregroundcolor Yellow
+    }
+    Write-Host ($status) -foregroundcolor Cyan
     Write-Host ('>') -nonewline -foregroundcolor Yellow
     return " "
 }
