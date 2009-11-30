@@ -72,3 +72,7 @@ function elevate-process
 VsVars32
 [System.Console]::Title = "Console"
 
+$scriptDirectory = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
+if ((Test-Path "$pwd\profile.ps1") -and ($scriptDirectory -ne $pwd)) {
+    . $pwd\profile.ps1
+}
