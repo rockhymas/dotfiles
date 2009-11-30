@@ -5,8 +5,9 @@ namespace ElevateProcess
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
+            var exitCode = 0;
             try
             {
                 var procInfo = new ProcessStartInfo
@@ -18,13 +19,17 @@ namespace ElevateProcess
                                    };
                 if (Environment.OSVersion.Version.Major >= 6)
                     procInfo.Verb = "runas";
-                Process.Start(procInfo);  //Start that process.
+                var process = Process.Start(procInfo);  //Start that process.
+                if (process == null) throw new Exception(procInfo.FileName + " could not be started.");
+                process.WaitForExit();
+                exitCode = process.ExitCode;
             }
-
             catch (Exception ex)
             {
                 Console.Out.Write(ex.Message);
+                return -1;
             }
+            return exitCode;
         }
     }
 }
