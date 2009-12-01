@@ -8,33 +8,35 @@ Sti_Trace.log
 .hgrc
 
 # Directories
-_ReSharper.TempSolution
-AppData
-Application Data
-Contacts
-Cookies
-Desktop
-Documents
-Downloads
-Favorites
-IECompatCache
-IETldCache
-Links
-Local Settings
-Music
-My Documents
-NetHood
-Pictures
-PrintHood
-PrivacIE
-Recent
-Saved Games
-Searches
-SendTo
-Start Menu
-Templates
-Tracing
-Videos
+AppData/*
+Application Data/*
+Contacts/*
+Cookies/*
+Desktop/*
+Documents/*
+Downloads/*
+Favorites/*
+IECompatCache/*
+IETldCache/*
+Links/*
+Local Settings/*
+Music/*
+My Documents/*
+NetHood/*
+Pictures/*
+PrintHood/*
+PrivacIE/*
+Recent/*
+Saved Games/*
+Searches/*
+SendTo/*
+Start Menu/*
+Templates/*
+Tracing/*
+Videos/*
+_ReSharper.*
+obj/*
+code/*/bin/*
 
 # File Types
 NTUSER.*
@@ -43,3 +45,8 @@ ntuser.*
 *~
 *.pyc
 *.pyo
+*.suo
+*.user
+*.resharper
+*.resharper.user
+*.sln.cache
