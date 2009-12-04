@@ -16,3 +16,6 @@ if (!(Test-Path $profilepath)) {
     New-Item (new-object System.IO.FileInfo $profile).Directory.FullName -type directory
 }
 Copy-Item $env:userprofile\bin\profileredirect.ps1 $profile
+
+& ".\consolasfont.reg"
+& ".\capslockisctrl.reg"
