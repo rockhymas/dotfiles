@@ -14,6 +14,16 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
+set ignorecase
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+set list
+set listchars=tab:>-,trail:-
+
+set wildmenu
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -87,8 +97,3 @@ source $VIMRUNTIME/mswin.vim
 :nn <C-S-Tab> <C-PageUp>
 :nn <C-PageDown> <C-W>w
 :nn <C-PageUp> <C-W>W
-
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set lcs=tab:>-,trail:-
