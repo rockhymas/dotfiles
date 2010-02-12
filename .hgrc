@@ -1,0 +1,17 @@
+[ui]
+editor = vim
+
+[diff]
+git = true
+
+[alias]
+l = pull
+p = push
+a = addremove -s 100
+
+[extensions]
+mq=
+patchbomb=
+fetch=
+convert=
+prompt=~/bin/prompt.py

@@ -5,7 +5,7 @@ _viminfo
 _hgcookies
 Sti_Trace.log
 .bash_history
-.hgrc
+Mercurial.ini
 
 # Directories
 AppData/*
