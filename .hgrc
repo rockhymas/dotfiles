@@ -12,7 +12,6 @@ a = addremove -s 100
 [extensions]
 mq=
 patchbomb=
-fetch=
 convert=
 bookmarks=
 prompt=~/bin/prompt.py
