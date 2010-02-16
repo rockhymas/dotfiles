@@ -26,17 +26,23 @@ function VsVars32($version = "9.0")
 
 function prompt
 {
-    hg prompt "{status|modified|unknown};{root};{root|basename}" | Set-Variable promptstr
+    hg prompt "{status|modified|unknown};{root};{root|basename};{bookmark};{<{incoming}};{>{outgoing}}" | Set-Variable promptstr
     $PWD.Path | Set-Variable path
     if ($promptstr -ne $null) {
         $promptstrarray = $promptstr.Split(';')
         $status = $promptstrarray[0]
         $root = $promptstrarray[1]
         $rootbasename = $promptstrarray[2]
+        $bookmark = $promptstrarray[3]
         $rootdir = $root.Remove($root.LastIndexOf($rootbasename))
         Write-Host ($rootdir) -nonewline -foregroundcolor Yellow
         Write-Host ($path.Substring($rootdir.Length)) -nonewline -foregroundcolor Green
-        Write-Host ($status) -foregroundcolor Yellow
+        if ($bookmark -ne "") 
+        {
+          Write-Host " at " -nonewline -foregroundcolor Yellow
+          Write-Host ($bookmark) -nonewline -foregroundcolor Green
+        }
+        Write-Host "$status$incoming$outgoing" -foregroundcolor Yellow
     }
     else {
         Write-Host ($path) -foregroundcolor Yellow
