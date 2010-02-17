@@ -15,3 +15,6 @@ patchbomb=
 convert=
 bookmarks=
 prompt=~/bin/prompt.py
+
+[bookmarks]
+track.current = True
