@@ -26,7 +26,7 @@ function VsVars32($version = "9.0")
 
 function prompt
 {
-    hg prompt "{status|modified|unknown};{root};{root|basename};{bookmark};" | Set-Variable promptstr
+    hg prompt "{status|modified|unknown}{update};{root};{root|basename};{bookmark};" | Set-Variable promptstr
     $PWD.Path | Set-Variable path
     if ($promptstr -ne $null) {
         $promptstrarray = $promptstr.Split(';')
