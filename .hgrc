@@ -8,6 +8,8 @@ git = true
 l = pull
 p = push
 a = addremove -s 100
+nudge = push --rev .
+nout = out --rev .
 
 [extensions]
 mq=
