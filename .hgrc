@@ -16,6 +16,7 @@ mq=
 patchbomb=
 convert=
 bookmarks=
+purge=
 prompt=~/bin/prompt.py
 
 [bookmarks]
