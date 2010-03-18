@@ -18,6 +18,7 @@ convert=
 bookmarks=
 purge=
 prompt=~/bin/prompt.py
+rebase=
 
 [bookmarks]
 track.current = True
