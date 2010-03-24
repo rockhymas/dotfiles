@@ -51,10 +51,9 @@ function prompt
     return " "
 }
 
-function which($name = "which")
+function which($name = "")
 {
-    $name = $name + ".*"
-    ($Env:Path).Split(";") | Get-ChildItem -filter $name | where {$_.Extension -match "^$|^.exe$|^.bat$|^.com$|^.ps1$"}
+    where.exe $name
 }
 
 function cd.. ([string]$path = ".")
