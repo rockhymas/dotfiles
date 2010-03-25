@@ -18,6 +18,7 @@ convert=
 bookmarks=
 purge=
 prompt=~/bin/prompt.py
+hg_remotebranches=~/bin/hg_remotebranches.py
 rebase=
 progress=
 
