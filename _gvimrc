@@ -2,3 +2,4 @@
 go "gmrLt"
 :set lines=150 columns=160
 winpos 0 0
+color slate

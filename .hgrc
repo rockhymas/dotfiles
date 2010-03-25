@@ -1,0 +1,24 @@
+[ui]
+editor = vim
+
+[diff]
+git = true
+
+[alias]
+l = pull
+p = push
+a = addremove -s 100
+nudge = push --rev .
+nout = out --rev .
+
+[extensions]
+mq=
+patchbomb=
+convert=
+bookmarks=
+purge=
+prompt=~/bin/prompt.py
+rebase=
+
+[bookmarks]
+track.current = True
