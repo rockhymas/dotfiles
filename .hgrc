@@ -22,7 +22,6 @@ progress=
 transplant=
 prompt=~/bin/prompt.py
 hg_remotebranches=~/bin/hg_remotebranches.py
-kiln=~/bin/kiln.py
 
 [bookmarks]
 track.current = True
