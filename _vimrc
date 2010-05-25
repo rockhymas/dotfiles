@@ -28,6 +28,8 @@ set wildmenu
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 let &guioptions = substitute(&guioptions, "t", "", "g")
 let &guioptions = substitute(&guioptions, "T", "", "g")
+let &guioptions = substitute(&guioptions, "m", "", "g")
+set guioptions+="grL"
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -97,3 +99,5 @@ source $VIMRUNTIME/mswin.vim
 :nn <C-S-Tab> <C-PageUp>
 :nn <C-PageDown> <C-W>w
 :nn <C-PageUp> <C-W>W
+
+:cab e tabe
