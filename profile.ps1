@@ -81,3 +81,15 @@ $scriptDirectory = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 if ((Test-Path "$pwd\profile.ps1") -and ($scriptDirectory -ne $pwd)) {
     . $pwd\profile.ps1
 }
+
+function e($file = "")
+{
+    if ($file -eq "") 
+    {
+        gvim
+    }
+    else 
+    {
+        gvim --remote-tab-silent $file
+    }
+}
