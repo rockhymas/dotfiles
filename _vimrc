@@ -99,5 +99,13 @@ source $VIMRUNTIME/mswin.vim
 :nn <C-S-Tab> <C-PageUp>
 :nn <C-PageDown> <C-W>w
 :nn <C-PageUp> <C-W>W
+:vn <C-Tab> <C-PageDown>
+:vn <C-S-Tab> <C-PageUp>
+:vn <C-PageDown> <C-W>w
+:vn <C-PageUp> <C-W>W
+:ino <C-Tab> <C-PageDown>
+:ino <C-S-Tab> <C-PageUp>
+:ino <C-PageDown> <C-W>w
+:ino <C-PageUp> <C-W>W
 
 :cab e tabe
