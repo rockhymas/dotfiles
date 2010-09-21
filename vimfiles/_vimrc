@@ -25,6 +25,7 @@ set expandtab
 set smarttab
 set list
 set listchars=tab:>-,trail:-
+set modelines=0
 
 set wildmenu
 
