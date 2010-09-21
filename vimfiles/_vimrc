@@ -1,39 +1,39 @@
 filetype off
 call pathogen#runtime_append_all_bundles()
 
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+set nocompatible        " This must be first, because it changes other options as a side effect.
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
+" Random Behavior
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  set nobackup          " do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+  set backup            " keep a backup file
 endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
-set ignorecase
-set tabstop=8
+set history=50          " keep 50 lines of command line history
+set ruler               " show the cursor position all the time
+set showcmd             " display incomplete commands
+set incsearch           " move the cursor as you type the search
+set ignorecase          " by default, when searching
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set modelines=0         " no need for modelines, risky anyway
+set scrolloff=3         " Scroll three lines before hitting the edge of the screen
+set wildmenu            " show tab completion for commands above command line
+
+" Tab stuff
+set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab
+
+" Display of characters
 set list
 set listchars=tab:>-,trail:-
-set modelines=0
 
-set wildmenu
-
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-let &guioptions = substitute(&guioptions, "t", "", "g")
-let &guioptions = substitute(&guioptions, "T", "", "g")
-let &guioptions = substitute(&guioptions, "m", "", "g")
-set guioptions+="grL"
+let &guioptions = substitute(&guioptions, "t", "", "g") " No tearoff menus
+let &guioptions = substitute(&guioptions, "T", "", "g") " No toolbar
+let &guioptions = substitute(&guioptions, "m", "", "g") " No menubar
+set guioptions+="grL"                                   " Scrollbars, gray menu items
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -83,9 +83,7 @@ if has("autocmd")
   augroup END
 
 else
-
   set autoindent		" always set autoindenting on
-
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
