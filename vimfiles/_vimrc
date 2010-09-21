@@ -19,6 +19,7 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 set modelines=0         " no need for modelines, risky anyway
 set scrolloff=3         " Scroll three lines before hitting the edge of the screen
 set wildmenu            " show tab completion for commands above command line
+set hidden              " keep buffers around if replaced via :e
 
 " Tab stuff
 set tabstop=4
