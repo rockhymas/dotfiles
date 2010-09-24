@@ -5,6 +5,8 @@ set nocompatible        " This must be first, because it changes other options a
 
 source $VIMRUNTIME/mswin.vim
 
+let mapleader = ","
+
 " Random Behavior
 if has("vms")
   set nobackup          " do not keep a backup file, use versions instead
@@ -13,8 +15,6 @@ else
 endif
 set history=50          " keep 50 lines of command line history
 set showcmd             " display incomplete commands
-set incsearch           " move the cursor as you type the search
-set ignorecase          " by default, when searching
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set modelines=0         " no need for modelines, risky anyway
 set scrolloff=3         " Scroll three lines before hitting the edge of the screen
@@ -23,6 +23,22 @@ set hidden              " keep buffers around if replaced via :e
 set wildmode=list:full  " complete first match, and show list of matches
 set visualbell          " Don't beep, just flash the screen quickly
 set laststatus=2        " Always show status line for last window
+set undofile            " keep persistent undo files
+
+" Search behavior
+nnoremap / /\v
+vnoremap / /\v
+set incsearch           " move the cursor as you type the search
+set ignorecase          " by default, when searching
+set smartcase           " override ignorecase if uppercase characters are typed
+set gdefault            " replace all matches on a line by default
+set showmatch           " Jump to matching bracket while searching
+if &t_Co > 2 || has("gui_running")
+  set hlsearch          " Also switch on highlighting the last used search pattern.
+endif
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
 
 " Appearance
 set ruler               " show the cursor position all the time
@@ -44,7 +60,6 @@ set smarttab
 let &guioptions = substitute(&guioptions, "t", "", "g") " No tearoff menus
 let &guioptions = substitute(&guioptions, "T", "", "g") " No toolbar
 let &guioptions = substitute(&guioptions, "m", "", "g") " No menubar
-set guioptions+="grL"                                   " Scrollbars, gray menu items
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -78,8 +93,15 @@ if has("autocmd")
   augroup vimrcEx
   au!
 
+  " Save all files when losing focus
+  autocmd FocusLost * :wa
+
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
+
+  " Show the cursor line for the current window only
+  autocmd WinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -105,7 +127,7 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
-
+" Tab and windows movement
 :nn <C-Tab> <C-PageDown>
 :nn <C-S-Tab> <C-PageUp>
 :nn <C-PageDown> <C-W>w
@@ -118,3 +140,25 @@ endif
 :ino <C-S-Tab> <C-PageUp>
 :ino <C-PageDown> <C-W>w
 :ino <C-PageUp> <C-W>W
+
+" Disable arrow keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" Make j/k go up/down by screen lines, not file lines
+nnoremap j gj
+nnoremap k gk
+
+" Make it easier to enter command mode
+nnoremap ; :
+
+" Store backup, swap, and undo files
+set directory=~\vimfiles\temp,c:\tmp,c:\temp
+set backupdir=~\vimfiles\temp,c:\tmp,c:\temp
+set undodir=~\vimfiles\undo
