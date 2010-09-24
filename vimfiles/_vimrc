@@ -3,6 +3,8 @@ call pathogen#runtime_append_all_bundles()
 
 set nocompatible        " This must be first, because it changes other options as a side effect.
 
+source $VIMRUNTIME/mswin.vim
+
 " Random Behavior
 if has("vms")
   set nobackup          " do not keep a backup file, use versions instead
@@ -10,9 +12,7 @@ else
   set backup            " keep a backup file
 endif
 set history=50          " keep 50 lines of command line history
-set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
-set showmode            " display non-command modes in command line
 set incsearch           " move the cursor as you type the search
 set ignorecase          " by default, when searching
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -21,6 +21,17 @@ set scrolloff=3         " Scroll three lines before hitting the edge of the scre
 set wildmenu            " show tab completion for commands above command line
 set hidden              " keep buffers around if replaced via :e
 set wildmode=list:full  " complete first match, and show list of matches
+set visualbell          " Don't beep, just flash the screen quickly
+set laststatus=2        " Always show status line for last window
+
+" Appearance
+set ruler               " show the cursor position all the time
+set showmode            " display non-command modes in command line
+set cursorline          " Highlight the line the cursor is on
+set ttyfast             " Do faster updating of the screen
+set relativenumber      " Do relative line numbering, rather than absolute
+set list
+set listchars=tab:>-,trail:-
 
 " Tab stuff
 set tabstop=4
@@ -29,10 +40,7 @@ set shiftwidth=4
 set expandtab
 set smarttab
 
-" Display of characters
-set list
-set listchars=tab:>-,trail:-
-
+" Gui options
 let &guioptions = substitute(&guioptions, "t", "", "g") " No tearoff menus
 let &guioptions = substitute(&guioptions, "T", "", "g") " No toolbar
 let &guioptions = substitute(&guioptions, "m", "", "g") " No menubar
@@ -97,9 +105,7 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
-source $VIMRUNTIME/mswin.vim
 
-:set nu
 :nn <C-Tab> <C-PageDown>
 :nn <C-S-Tab> <C-PageUp>
 :nn <C-PageDown> <C-W>w
@@ -112,5 +118,3 @@ source $VIMRUNTIME/mswin.vim
 :ino <C-S-Tab> <C-PageUp>
 :ino <C-PageDown> <C-W>w
 :ino <C-PageUp> <C-W>W
-
-:cab e tabe
