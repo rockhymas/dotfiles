@@ -26,8 +26,6 @@ set laststatus=2        " Always show status line for last window
 set undofile            " keep persistent undo files
 
 " Search behavior
-nnoremap / /\v
-vnoremap / /\v
 set incsearch           " move the cursor as you type the search
 set ignorecase          " by default, when searching
 set smartcase           " override ignorecase if uppercase characters are typed
