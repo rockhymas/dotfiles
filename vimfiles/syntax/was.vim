@@ -42,8 +42,6 @@ syn keyword WasabiFunction  contained GetArray GetArrayRef
 
 " Colored variable names, if written in hungarian notation
 " Subtly admonish the mixture of hungarian and non-hungarian notation
-hi WasabiVariableSimple     term=standout   ctermfg=3   guifg=#665050
-hi WasabiVariableHungarian  term=standout   ctermfg=3   guifg=#666666
 syn match WasabiVariableSimple      contained "\C\<\l\(\l\|\u\|\d\|_\)*\>"
 syn match WasabiVariableHungarian   contained "\C\<\(c\|f\|b\|dt\|d\|ix\|n\|s\|rg\|o\|rs\|err\|pg\|pre\|dict\|cmd\|u\|fxn\|col\|api\|instance\|list\)\+\(\u\w*\)*\>"
 
@@ -209,6 +207,9 @@ if version >= 508 || !exists("did_was_syn_inits")
 
   delcommand HiLink
 endif
+
+" Tab stuff
+set noexpandtab
 
 let b:current_syntax = "was"
 
