@@ -1,0 +1,20 @@
+2011-05-12 Thu 09:50 AM
+Preparing rocklog.txt for daily use
+
+[2011-05-12 Thu 10:03 AM]
+Building nightly builds and deploying kiln/fogbugz to hosted test
+
+[2011-05-12 Thu 10:14 AM]
+Kicking off kiln test generation deploy
+
+[2011-05-12 Thu 10:18 AM]
+Going through incoming cases/code reviews
+
+[2011-05-12 Thu 10:28 AM]
+Moving test accounts to new fb/kiln generations
+
+[2011-05-12 Thu 10:32 AM]
+Document different s/sbodytext/sbodyhtml values across axes: 
+    plain/html/plain+html
+    xml/ui
+

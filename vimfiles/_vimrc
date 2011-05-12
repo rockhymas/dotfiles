@@ -169,6 +169,10 @@ nnoremap <leader><space> :noh<cr>
 noremap <right> :bnext<cr>
 noremap <left> :bprev<cr>
 
+" Insert date/time stamps
+nmap <F3> Go<C-R>=strftime("[%Y-%m-%d %a %I:%M %p]\n")<CR>
+imap <F3> <ESC>Go<C-R>=strftime("[%Y-%m-%d %a %I:%M %p]\n")<CR>
+
 " Store backup, swap, and undo files
 set directory=~/vimfiles/temp/,c:/tmp,c:/temp
 set backupdir=~/vimfiles/temp/,c:/tmp,c:/temp
