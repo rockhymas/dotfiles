@@ -18,3 +18,144 @@ Document different s/sbodytext/sbodyhtml values across axes:
     plain/html/plain+html
     xml/ui
 
+[2011-05-12 Thu 10:53 AM]
+Kicking off 2.4.112 hosted build for Sam, and possibly for release as well
+
+[2011-05-12 Thu 11:21 AM]
+Just did a 1:1 with Babak
+- He'll figure out Concierge status for the summer (Dane back?)
+- I'll write an email to Sam/Rich re further protection, at least for the next few months
+- Talk with Jude/Aaron/Dane re career level in July sometime
+
+[2011-05-12 Thu 11:45 AM]
+Restarting heartbeat on both boxes to pick up changes to the active generations
+
+[2011-05-12 Thu 11:50 AM]
+Back to cataloging work
+
+[2011-05-12 Thu 12:34 PM]
+Back from lunch, back to cataloging
+
+[2011-05-12 Thu 02:20 PM]
+Finished up looking into html/plaintext emails in the xml api. Sent to dane for review.
+
+[2011-05-12 Thu 02:24 PM]
+Going to order a standing mat
+
+[2011-05-12 Thu 02:39 PM]
+Building devel FogBugz so QA can test the xml api changes to s and sBodyText
+
+[2011-05-12 Thu 02:40 PM]
+Next up: rationalize our case load
+
+[2011-05-12 Thu 02:44 PM]
+Never mind, going to talk to Aaron, Sam/Isaac first
+
+[2011-05-12 Thu 03:22 PM]
+Back to rationalizing our case load
+
+[2011-05-13 Fri 10:30 AM]
+First, get the latest hosted builds deployed, with test accounts running
+
+[2011-05-13 Fri 11:08 AM]
+Moving my backlogged bugs to user "Backlog", and moved all bugs assigned to Backlog to the backlog milestone
+
+[2011-05-13 Fri 01:14 PM]
+Just finished my daily web timebox
+
+[2011-05-13 Fri 02:09 PM]
+Trying to import another time, customer db that imported without primary keys
+
+[2011-05-13 Fri 02:46 PM]
+Installing sql server 2005 so I can try importing the db to that
+
+[2011-05-13 Fri 03:43 PM]
+Spent the last 40 minutes or so discussing the new design changes that Justin is working on. They're looking really cool.
+
+[2011-05-16 Mon 09:30 AM]
+In to work, going to plan my day out
+
+[2011-05-16 Mon 10:07 AM]
+Playing with BugMonkey and the filter menu
+
+[2011-05-16 Mon 11:06 AM]
+Finished fixing the filter menu, learned some new jQuery, now it's time to look at the release status for today
+We have jQuery 1.3 in FogBugz. We should really upgrade to 1.6 at some point soon
+
+[2011-05-16 Mon 11:08 AM]
+Ok, release is looking good, assuming QA passes off on it by eod. Now I'm going to process my undecided cases, trying to get things in a good state for the internship.
+
+[2011-05-16 Mon 12:25 PM]
+Time for my web timebox.
+
+[2011-05-16 Mon 02:26 PM]
+Talked with Aaron re new bug filing plan. We agreed that it makes sense to have him help with the main thrust for the summer: UI Refresh. Then we talked about having him help both interns, which he agreed to do. So we walked through things with him and Justin. I'll be the protection for the summer - inbox cases, random bugs, etc. I was also very impressed with his perception on the product. I think he could take over as FogBugz lead if need be.
+
+[2011-05-16 Mon 02:28 PM]
+Now I'm restarting heartbeat to unblock test accounts, which aren't getting heartbeat.
+
+[2011-05-16 Mon 03:47 PM]
+Just fixed a case filed by support on mysql performance. Verified that behavior is unchanged. Did not verify that performance improved.
+
+[2011-05-16 Mon 04:02 PM]
+Looking at an IE9 bug with sizing the case view
+
+[2011-05-17 Tue 09:25 AM]
+Just got in, doing my morning planning
+
+[2011-05-17 Tue 09:44 AM]
+Clearing out old bugzscout reports
+
+[2011-05-17 Tue 09:56 AM]
+Going back and forth to help Kiln fix the break that happened with last night's release. They'd like to go back to 2.4, if possible. That would require building and deploying a new version of FogBugz 8.5 with the Kiln 2.4 plugin. Then we manually reset people's Kiln version to 2.4, and update the hosted metabase accordingly. Seems risky, but another option would be to change the default generation back to 2.4.112, if that will help with new signups.
+
+[2011-05-17 Tue 01:55 PM]
+Fixing up my FogBugz ui some more with BugMonkey
+
+[2011-05-18 Wed 09:30 AM]
+Starting the day with planning
+
+[2011-05-18 Wed 09:52 AM]
+Stopped weird qany1 error reports by turning heartbeat off
+
+[2011-05-19 Thu 10:23 AM]
+Spent the last 30 minutes looking into a weird bug with the size of the filter by project dropdown (in ondemand, not in ourdot)
+
+[2011-05-20 Fri 09:16 AM]
+Into work, planning my day
+
+[2011-05-23 Mon 09:08 AM]
+Just got in, writing my weekly kiwi
+
+[2011-05-23 Mon 09:34 AM]
+Finished weekly kiwi, Now I'm going to document the downgrade steps for a customer, from 8.4 to 8.2
+
+[2011-05-23 Mon 10:51 AM]
+Just talked with Rob about the inbox case (null schema one), here's hoping it's related to the attachment/indexfilepage perf improvements I wrote up last week
+
+[2011-05-23 Mon 11:07 AM]
+Shared my "new nav bar" bugmonkey script in the kiwi house, so we can get feedback
+
+[2011-05-23 Mon 11:25 AM]
+Trying to track down why hosted bugzscout reports aren't happening
+
+[2011-05-24 Tue 01:04 PM]
+This morning I:
+    Looked into lookbooks issue where their filters were getting messed up. Loooking at logs shows that api calls are changing the default filter for the user. 
+    Helped Benjamin get things on track for bumping hosted test accounts.
+    Talked with babak about the rollout.
+    Got caught up on the errors from last night. Something got messed up on hbny2 that was causing regular crashes. Babak fixed it, and we still have one account that is not being heartbeat because it brings down IIS. 
+
+[2011-05-25 Wed 02:05 PM]
+Spent the morning on two inbox cases. 
+    1) Was to get the Frogger db setup so it could imported for a hosted customer who wants to use it for demos
+    2) Try to figure out why wtw's hosted account is bringing down IIS. I tried to collect crash dumps, call stacks, etc. No cigar. 
+Next step on 2 is to get a hosted dev environment setup so I can debug this one account. That's a lot of work, but I should really have it setup anyway.
+
+[2011-05-26 Thu 09:23 AM]
+Just got in, looked at some cases. Now I'm going to work some more on the wtw issue.
+
+[2011-05-26 Thu 02:34 PM]
+Ok, fixed the wtw issue, deployed a new gen, now need to move test accounts to it. Also helped Ben track down an issue with the upgradeservice that was causing problems for Kiln.
+Now I'm going to upgrade test accounts
+
