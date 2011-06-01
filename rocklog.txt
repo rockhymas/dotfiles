@@ -159,3 +159,33 @@ Just got in, looked at some cases. Now I'm going to work some more on the wtw is
 Ok, fixed the wtw issue, deployed a new gen, now need to move test accounts to it. Also helped Ben track down an issue with the upgradeservice that was causing problems for Kiln.
 Now I'm going to upgrade test accounts
 
+[2011-05-31 Tue 09:27 AM]
+First, write my weekly kiwi. Then plan my week.
+
+[2011-05-31 Tue 10:10 AM]
+Making sure the upgrade service is running on all hb/webny boxes
+
+[2011-05-31 Tue 10:17 AM]
+All done with restarting the upgrade service. Now I'm off to fix a heartbeat code review change.
+
+[2011-05-31 Tue 10:32 AM]
+Talked with Ben re release schedule, got autobuild-windows updated with latest patches. 
+Said hi to all the interns.
+
+[2011-05-31 Tue 10:33 AM]
+Going through my 8.5 cases, to see which ones I can backlog/won't fix.
+
+[2011-05-31 Tue 04:57 PM]
+Worked on a couple inbox issues today - one with Ben that turned out to be a false alarm, the user was using stored procedures to add cases. Crazy. The second was a perf problem on webny5 that turned out to be emails coming in that html agility pack barfed on because the code was slow. So I put in some perf fixes and voila, it's fast.
+
+[2011-06-01 Wed 09:28 AM]
+Just got in. Have two inbox cases to tackle: weird filters and multiple timesheet registrations
+
+[2011-06-01 Wed 12:19 PM]
+Weird filters - answered the questions
+Multiple timesheet entries - getting closer via code inspection
+Also did an interview, the guy didn't do very well, and I smartly cut it off early
+
+[2011-06-01 Wed 01:42 PM]
+Did a little random catchup, now I'm working on an image not visible inbox case.
+
