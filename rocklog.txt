@@ -189,3 +189,29 @@ Also did an interview, the guy didn't do very well, and I smartly cut it off ear
 [2011-06-01 Wed 01:42 PM]
 Did a little random catchup, now I'm working on an image not visible inbox case.
 
+[2011-06-01 Wed 03:39 PM]
+Still working on image not visible case
+
+[2011-06-02 Thu 11:48 AM]
+More heartbeat emergencies last night and this morning. All of them are related to bugs in HtmlAgilityPack that I've fixed but that we haven't got deployed yet. That's all under control now. Jude's got some good perf fixes for search in and we're testing, but we may release them quicker than we'd like to. Here's hoping they are safe.
+
+[2011-06-02 Thu 01:47 PM]
+Talked with Aaron about the interns, sounds like things are going well there. 
+Now going through incoming cases
+
+[2011-06-02 Thu 01:49 PM]
+That was easy. Now I'm going to go talk to Jude about getting the search changes out quick.
+
+[2011-06-02 Thu 02:18 PM]
+Deploying FB to ourdot, so we'll feel better about this evening's release.
+While, that's going on, I'm going to fix up our db access in the kiln build scripts
+
+[2011-06-06 Mon 10:29 AM]
+Took care of an inbox inquiry already this morning, and have been dealing with old, unimportant bugzscout's. Going to reset my password, and get to work planning my work for the coming weeks so that I'm able to monitor everything that needs to be done.
+
+[2011-06-06 Mon 11:46 AM]
+Currently working out my weekly kiwi. 
+
+[2011-06-06 Mon 12:00 PM]
+Adjusted the heartbeat thread numbers back to where they were before the last upgrade in hopes of getting us better p1 heartbeat performance.
+
