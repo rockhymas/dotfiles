@@ -215,3 +215,33 @@ Currently working out my weekly kiwi.
 [2011-06-06 Mon 12:00 PM]
 Adjusted the heartbeat thread numbers back to where they were before the last upgrade in hopes of getting us better p1 heartbeat performance.
 
+[2011-06-06 Mon 01:58 PM]
+Working through backlogged hosted cases and watching wwdc announcements
+
+[2011-06-07 Tue 09:48 AM]
+Got in, working on a script to clear out cases that are for versions that we no longer care about (old hosted versions)
+
+[2011-06-07 Tue 10:58 AM]
+Script is done, now I'm back to weekly planning and getting things under control
+
+[2011-06-08 Wed 11:27 AM]
+Spent the morning learning about how our mail code hooks up to ssl pop accounts, didn't get very far, but we've sent the case back to the customer.
+
+[2011-06-08 Wed 11:28 AM]
+Now back to planning, getting things under control
+
+[2011-06-08 Wed 01:41 PM]
+Catching up on undecided cases
+
+[2011-06-09 Thu 09:21 AM]
+Clearing out inboxes, getting things in order: my new morning routine. 1 Pomodoro down, 1 to go
+
+[2011-06-09 Thu 09:47 AM]
+Ok, I'm all on top of things now. Life is good. Time to sit down with Jude/Aaron/Babak
+
+[2011-06-09 Thu 11:07 AM]
+Talked with Aaron
+Then merged release+devel to dogfood and back to devel
+Now building licensed builds of FogBugz + Kiln 
+And off to talk with Babak
+
