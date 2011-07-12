@@ -3,4 +3,5 @@ syntax: glob
 *~
 *.swp
 _viminf*
-vimfiles\undo
+vimfiles/undo
+AppData/*
