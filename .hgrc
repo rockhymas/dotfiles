@@ -27,3 +27,6 @@ hg_remotebranches=~/bin/hg_remotebranches.py
 
 [bookmarks]
 track.current = True
+
+[remotebranches]
+alias.default = True
