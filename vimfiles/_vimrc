@@ -36,13 +36,14 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 " Appearance
+set cursorline          " Highlight the line the cursor is on
+set list                " Show certain characters
+set listchars=tab:>-,trail:- " Show tabs as >--- and trailing spaces as -
+set relativenumber      " Do relative line numbering, rather than absolute
 set ruler               " show the cursor position all the time
 set showmode            " display non-command modes in command line
-set cursorline          " Highlight the line the cursor is on
 set ttyfast             " Do faster updating of the screen
-set relativenumber      " Do relative line numbering, rather than absolute
-set list
-set listchars=tab:>-,trail:-
+set wrap                " Wrap lines
 
 " Tab stuff
 set tabstop=4
@@ -50,6 +51,11 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab
+
+" Store backup, swap, and undo files
+set directory=~/vimfiles/temp/,c:/tmp,c:/temp
+set backupdir=~/vimfiles/temp/,c:/tmp,c:/temp
+set undodir=~/vimfiles/undo
 
 " Gui options
 let &guioptions = substitute(&guioptions, "t", "", "g") " No tearoff menus
@@ -60,10 +66,6 @@ let &guioptions = substitute(&guioptions, "L", "", "g") " No left scrollbar
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -90,9 +92,6 @@ if has("autocmd")
   augroup vimrcEx
   au!
 
-  " Save all files when losing focus
-  autocmd FocusLost * :wa
-
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
 
@@ -116,7 +115,7 @@ if has("autocmd")
   augroup END
 
 else
-  set autoindent		" always set autoindenting on
+  set autoindent        " always set autoindenting on
 endif " has("autocmd")
 
 " Convenient command to see the difference between the current buffer and the
@@ -128,18 +127,18 @@ if !exists(":DiffOrig")
 endif
 
 " Tab and windows movement
-:nn <C-Tab> <C-PageDown>
-:nn <C-S-Tab> <C-PageUp>
-:nn <C-PageDown> <C-W>w
-:nn <C-PageUp> <C-W>W
-:vn <C-Tab> <C-PageDown>
-:vn <C-S-Tab> <C-PageUp>
-:vn <C-PageDown> <C-W>w
-:vn <C-PageUp> <C-W>W
-:ino <C-Tab> <C-PageDown>
-:ino <C-S-Tab> <C-PageUp>
-:ino <C-PageDown> <C-W>w
-:ino <C-PageUp> <C-W>W
+:nnoremap <C-Tab> <C-PageDown>
+:nnoremap  <C-S-Tab> <C-PageUp>
+:nnoremap  <C-PageDown> <C-W>w
+:nnoremap  <C-PageUp> <C-W>W
+:vnoremap  <C-Tab> <C-PageDown>
+:vnoremap  <C-S-Tab> <C-PageUp>
+:vnoremap  <C-PageDown> <C-W>w
+:vnoremap  <C-PageUp> <C-W>W
+:inoremap <C-Tab> <C-PageDown>
+:inoremap <C-S-Tab> <C-PageUp>
+:inoremap <C-PageDown> <C-W>w
+:inoremap <C-PageUp> <C-W>W
 
 " Disable arrow keys
 nnoremap <up> <nop>
@@ -151,10 +150,6 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-" Use tab to switch between block delimiters
-nnoremap <tab> %
-vnoremap <tab> %
-
 " Make j/k go up/down by screen lines, not file lines
 nnoremap j gj
 nnoremap k gk
@@ -162,18 +157,17 @@ nnoremap k gk
 " Make it easier to enter command mode
 nnoremap ; :
 
-" easily clear current search
-nnoremap <leader><space> :noh<cr>
-
 " Use the arrow keys for switching buffers
 noremap <right> :bnext<cr>
 noremap <left> :bprev<cr>
 
-" Insert date/time stamps
-nmap <F3> Go<C-R>=strftime("[%Y-%m-%d %a %I:%M %p]\n")<CR>
-imap <F3> <ESC>Go<C-R>=strftime("[%Y-%m-%d %a %I:%M %p]\n")<CR>
+" easily clear current search
+nnoremap <leader><space> :noh<cr>
 
-" Store backup, swap, and undo files
-set directory=~/vimfiles/temp/,c:/tmp,c:/temp
-set backupdir=~/vimfiles/temp/,c:/tmp,c:/temp
-set undodir=~/vimfiles/undo
+" Move lines up or down
+nnoremap <leader>j ddp
+nnoremap <leader>k ddkkp
+
+" Uppercase the current word
+nnoremap <leader>u viwUe
+
