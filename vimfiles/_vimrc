@@ -140,6 +140,10 @@ endif
 :inoremap <C-PageDown> <C-W>w
 :inoremap <C-PageUp> <C-W>W
 
+" Use jk for leaving insert mode, not escape
+:inoremap jk <esc>
+:inoremap <esc> <nop>
+
 " Disable arrow keys
 noremap <up> <nop>
 noremap <down> <nop>
@@ -155,7 +159,7 @@ noremap H 0
 noremap L $
 
 " Make it easier to enter command mode
-nnoremap ; :
+noremap ; :
 
 " Use the arrow keys for switching buffers
 noremap <right> :bnext<cr>
