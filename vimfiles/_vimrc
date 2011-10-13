@@ -46,11 +46,11 @@ set ttyfast             " Do faster updating of the screen
 set wrap                " Wrap lines
 
 " Tab stuff
-set tabstop=4
-set softtabstop=4
 set shiftwidth=4
-set expandtab
 set smarttab
+set softtabstop=4
+set expandtab
+set tabstop=4
 
 " Store backup, swap, and undo files
 set directory=~/vimfiles/temp/,c:/tmp,c:/temp
@@ -123,7 +123,7 @@ endif " has("autocmd")
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+          \ | wincmd p | diffthis
 endif
 
 " Tab and windows movement
@@ -141,18 +141,18 @@ endif
 :inoremap <C-PageUp> <C-W>W
 
 " Disable arrow keys
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
 
 " Make j/k go up/down by screen lines, not file lines
-nnoremap j gj
-nnoremap k gk
+noremap j gj
+noremap k gk
+
+" Move further left and right
+noremap H 0
+noremap L $
 
 " Make it easier to enter command mode
 nnoremap ; :
@@ -170,4 +170,24 @@ nnoremap <leader>k ddkkp
 
 " Uppercase the current word
 nnoremap <leader>u viwUe
+" Quotes around the current word
+nnoremap <leader>" viwh<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' viwh<esc>a'<esc>hbi'<esc>lel
+" Quotes around the current selection
+vnoremap <leader>" o<esc>i"<esc>gvlo<esc>a"<esc>gvl
 
+" Open and source the vimrc file
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>wgf
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Common abbreviations
+iabbrev adn and
+iabbrev teh the
+iabbrev tehn then
+iabbrev waht what
+
+" Personal abbreviations
+iabbrev @@ rock@hymasfamily.org
+iabbrev ccopy Copyright 2011 Rock Hymas. All rights reserved.
+iabbrev wweb http://rockhymas.com
+iabbrev ssig --<cr>Rock Hymas<cr>rock@hymasfamily.org
