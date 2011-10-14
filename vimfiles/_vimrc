@@ -184,6 +184,15 @@ vnoremap <leader>" o<esc>i"<esc>gvlo<esc>a"<esc>gvl
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>wgf
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+" Commenting in various file types
+autocmd FileType c nnoremap <buffer> <localleader>c I//
+autocmd FileType cpp nnoremap <buffer> <localleader>c I//
+autocmd FileType cs nnoremap <buffer> <localleader>c I//
+autocmd FileType javascript nnoremap <buffer> <localleader>c I//
+autocmd FileType python nnoremap <buffer> <localleader>c I#
+autocmd FileType was nnoremap <buffer> <localleader>c I'
+autocmd FileType vim nnoremap <buffer> <localleader>c I"
+
 " Common abbreviations
 iabbrev adn and
 iabbrev teh the
