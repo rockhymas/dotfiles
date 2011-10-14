@@ -209,7 +209,7 @@ if version >= 508 || !exists("did_was_syn_inits")
 endif
 
 " Tab stuff
-set noexpandtab
+setlocal noexpandtab
 
 let b:current_syntax = "was"
 
