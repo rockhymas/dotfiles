@@ -158,6 +158,27 @@ noremap ; :
 noremap <right> :bnext<cr>
 noremap <left> :bprev<cr>
 
+" Operator pending helpers
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap il( :<c-u>normal! F)vi(<cr>
+onoremap an( :<c-u>normal! f(va(<cr>
+onoremap al( :<c-u>normal! F)va(<cr>
+onoremap in{ :<c-u>normal! f{vi{<cr>
+onoremap il{ :<c-u>normal! F}vi{<cr>
+onoremap an{ :<c-u>normal! f{va{<cr>
+onoremap al{ :<c-u>normal! F}va{<cr>
+onoremap in[ :<c-u>normal! f[vi[<cr>
+onoremap il[ :<c-u>normal! F]vi[<cr>
+onoremap an[ :<c-u>normal! f[va[<cr>
+onoremap al[ :<c-u>normal! F]va[<cr>
+
+" Markdown specific mappings
+augroup markdown
+    au!
+    autocmd FileType markdown onoremap ih :<c-u>execute "normal! ?^\\(==\\+\\\|--\\+\\)$\r:nohlsearch\rkvg_"<cr>
+    autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?^\\(==\\+\\\|--\\+\\)$\r:nohlsearch\rg_vk0"<cr>
+augroup END
+
 " easily clear current search
 nnoremap <leader><space> :noh<cr>
 
