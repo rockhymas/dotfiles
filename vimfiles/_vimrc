@@ -176,6 +176,7 @@ onoremap al[ :<c-u>normal! F]va[<cr>
 augroup filetype_vim
     au!
     autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim setlocal foldlevelstart=0
 augroup END
 " }}}
 
@@ -204,7 +205,7 @@ nnoremap <leader>' viwh<esc>a'<esc>hbi'<esc>lel
 
 " Quotes around the current selection {{{
 vnoremap <leader>" o<esc>i"<esc>gvlo<esc>a"<esc>gvl
-}}}
+" }}}
 
 " Open and source the vimrc file {{{
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>wgf
