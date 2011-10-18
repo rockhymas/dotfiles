@@ -172,8 +172,15 @@ onoremap an[ :<c-u>normal! f[va[<cr>
 onoremap al[ :<c-u>normal! F]va[<cr>
 " }}}
 
+" VimRC specific mappings {{{
+augroup filetype_vim
+    au!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
 " Markdown specific mappings {{{
-augroup markdown
+augroup filetype_markdown
     au!
     autocmd FileType markdown onoremap ih :<c-u>execute "normal! ?^\\(==\\+\\\|--\\+\\)$\r:nohlsearch\rkvg_"<cr>
     autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?^\\(==\\+\\\|--\\+\\)$\r:nohlsearch\rg_vk0"<cr>
