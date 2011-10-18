@@ -1,6 +1,15 @@
+" Copyright 2011 Rock Hymas. All rights reserved.
+
+" Pathogen bundle setup {{{
 filetype off
 call pathogen#runtime_append_all_bundles()
+" }}}
 
+" Set mapleader for all following mappings {{{
+let mapleader = ","
+" }}}
+
+" Make it ViM on Windows {{{
 set nocompatible        " This must be first, because it changes other options as a side effect.
 
 source $VIMRUNTIME/mswin.vim
@@ -9,16 +18,12 @@ source $VIMRUNTIME/mswin.vim
 if has('mouse')
     set mouse=a
 endif
+" }}}
 
 " Enable file type detection, filetype indenting {{{
 filetype plugin indent on
 syntax on
 " }}}
-
-let mapleader = ","
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
 
 " Random Behavior {{{
 if has("vms")
@@ -105,57 +110,52 @@ augroup vimrcEx
 augroup END
 " }}}
 
-" For all text files set 'textwidth' to 78 characters.
-autocmd FileType text setlocal textwidth=78
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-          \ | wincmd p | diffthis
-    echom "added DiffOrig"
-endif
+" Don't use Ex mode, use Q for formatting {{{
+map Q gq
+" }}}
 
 " Tab and windows movement {{{
 :nnoremap <C-Tab> <C-PageDown>
 :nnoremap  <C-S-Tab> <C-PageUp>
-:nnoremap  <C-PageDown> <C-W>w
-:nnoremap  <C-PageUp> <C-W>W
 :vnoremap  <C-Tab> <C-PageDown>
 :vnoremap  <C-S-Tab> <C-PageUp>
-:vnoremap  <C-PageDown> <C-W>w
-:vnoremap  <C-PageUp> <C-W>W
 :inoremap <C-Tab> <C-PageDown>
 :inoremap <C-S-Tab> <C-PageUp>
+:nnoremap  <C-PageDown> <C-W>w
+:nnoremap  <C-PageUp> <C-W>W
+:vnoremap  <C-PageDown> <C-W>w
+:vnoremap  <C-PageUp> <C-W>W
 :inoremap <C-PageDown> <C-W>w
 :inoremap <C-PageUp> <C-W>W
 " }}}
 
-" Use jk for leaving insert mode, not escape
+" Use jk for leaving insert mode, not escape {{{
 :inoremap jk <esc>
+:vnoremap jk <esc>
 :inoremap <esc> <nop>
+:vnoremap <esc> <nop>
+" }}}
 
-" Disable arrow keys
+" Disable arrow keys {{{
 noremap <up> <nop>
 noremap <down> <nop>
 noremap <left> <nop>
 noremap <right> <nop>
+" }}}
 
-" Make j/k go up/down by screen lines, not file lines
+" Make j/k go up/down by screen lines, not file lines {{{
 noremap j gj
 noremap k gk
+" }}}
 
-" Move further left and right
+" Move further left and right {{{
 noremap H 0
 noremap L $
+" }}}
 
-" Make it easier to enter command mode
+" Make it easier to enter command mode {{{
 noremap ; :
-
-" Use the arrow keys for switching buffers
-noremap <right> :bnext<cr>
-noremap <left> :bprev<cr>
+" }}}
 
 " Operator pending helpers - next and last blocks {{{
 onoremap in( :<c-u>normal! f(vi(<cr>
@@ -180,24 +180,29 @@ augroup markdown
 augroup END
 " }}}
 
-" easily clear current search
+" easily clear current search {{{
 nnoremap <leader><space> :noh<cr>
+" }}}
 
-" Move lines up or down
+" Move lines up or down {{{
 nnoremap <leader>j ddp
 nnoremap <leader>k ddkkp
+" }}}
 
-" Uppercase the current word
+" Uppercase or put quotes around the current word {{{
 nnoremap <leader>u viwUe
-" Quotes around the current word
 nnoremap <leader>" viwh<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viwh<esc>a'<esc>hbi'<esc>lel
-" Quotes around the current selection
-vnoremap <leader>" o<esc>i"<esc>gvlo<esc>a"<esc>gvl
+" }}}
 
-" Open and source the vimrc file
+" Quotes around the current selection {{{
+vnoremap <leader>" o<esc>i"<esc>gvlo<esc>a"<esc>gvl
+}}}
+
+" Open and source the vimrc file {{{
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>wgf
 nnoremap <leader>sv :source $MYVIMRC<cr>
+" }}}
 
 " Commenting in various file types {{{
 augroup commenting
