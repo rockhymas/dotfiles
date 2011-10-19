@@ -1,13 +1,31 @@
+" Copyright 2011 Rock Hymas. All rights reserved.
+
+" Pathogen bundle setup {{{
 filetype off
 call pathogen#runtime_append_all_bundles()
+" }}}
 
+" Set mapleader for all following mappings {{{
+let mapleader = ","
+" }}}
+
+" Make it ViM on Windows {{{
 set nocompatible        " This must be first, because it changes other options as a side effect.
 
 source $VIMRUNTIME/mswin.vim
 
-let mapleader = ","
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+    set mouse=a
+endif
+" }}}
 
-" Random Behavior
+" Enable file type detection, filetype indenting {{{
+filetype plugin indent on
+syntax on
+" }}}
+
+" Random Behavior {{{
 if has("vms")
     set nobackup          " do not keep a backup file, use versions instead
 else
@@ -24,18 +42,18 @@ set wildmode=list:full  " complete first match, and show list of matches
 set visualbell          " Don't beep, just flash the screen quickly
 set laststatus=2        " Always show status line for last window
 set undofile            " keep persistent undo files
+" }}}
 
-" Search behavior
+" Search behavior {{{
 set incsearch           " move the cursor as you type the search
 set ignorecase          " by default, when searching
 set smartcase           " override ignorecase if uppercase characters are typed
 set gdefault            " replace all matches on a line by default
 set showmatch           " Jump to matching bracket while searching
-if &t_Co > 2 || has("gui_running")
-    set hlsearch          " Also switch on highlighting the last used search pattern.
-endif
+set hlsearch
+" }}}
 
-" Appearance
+" Appearance {{{
 set cursorline          " Highlight the line the cursor is on
 set list                " Show certain characters
 set listchars=tab:>-,trail:- " Show tabs as >--- and trailing spaces as -
@@ -44,53 +62,33 @@ set ruler               " show the cursor position all the time
 set showmode            " display non-command modes in command line
 set ttyfast             " Do faster updating of the screen
 set wrap                " Wrap lines
+" }}}
 
-" Tab stuff
+" Tab stuff {{{
 set shiftwidth=4
 set smarttab
 set softtabstop=4
 set expandtab
 set tabstop=4
+" }}}
 
-" Store backup, swap, and undo files
+" Store backup, swap, and undo files {{{
 set directory=~/vimfiles/temp/,c:/tmp,c:/temp
 set backupdir=~/vimfiles/temp/,c:/tmp,c:/temp
 set undodir=~/vimfiles/undo
+" }}}
 
-" Gui options
+" Gui options {{{
 let &guioptions = substitute(&guioptions, "t", "", "g") " No tearoff menus
 let &guioptions = substitute(&guioptions, "T", "", "g") " No toolbar
 let &guioptions = substitute(&guioptions, "m", "", "g") " No menubar
 let &guioptions = substitute(&guioptions, "r", "", "g") " No right scrollbar
 let &guioptions = substitute(&guioptions, "L", "", "g") " No left scrollbar
+" }}}
 
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-    set mouse=a
-endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-    syntax on
-    set hlsearch
-endif
-
-" Enable file type detection.
-" Use the default filetype settings, so that mail gets 'tw' set to 72,
-" 'cindent' is on in C files, etc.
-" Also load indent files, to automatically do language-dependent indenting.
-filetype plugin indent on
-
-" Put these in an autocmd group, so that we can delete them easily.
+" Common autocommands {{{
 augroup vimrcEx
     au!
-
-    " For all text files set 'textwidth' to 78 characters.
-    autocmd FileType text setlocal textwidth=78
 
     " Show the cursor line for the current window only
     autocmd WinEnter * setlocal cursorline
@@ -110,74 +108,111 @@ augroup vimrcEx
     \ endif
 
 augroup END
+" }}}
 
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-          \ | wincmd p | diffthis
-endif
+" Don't use Ex mode, use Q for formatting {{{
+map Q gq
+" }}}
 
-" Tab and windows movement
+" Tab and windows movement {{{
 :nnoremap <C-Tab> <C-PageDown>
 :nnoremap  <C-S-Tab> <C-PageUp>
-:nnoremap  <C-PageDown> <C-W>w
-:nnoremap  <C-PageUp> <C-W>W
 :vnoremap  <C-Tab> <C-PageDown>
 :vnoremap  <C-S-Tab> <C-PageUp>
-:vnoremap  <C-PageDown> <C-W>w
-:vnoremap  <C-PageUp> <C-W>W
 :inoremap <C-Tab> <C-PageDown>
 :inoremap <C-S-Tab> <C-PageUp>
+:nnoremap  <C-PageDown> <C-W>w
+:nnoremap  <C-PageUp> <C-W>W
+:vnoremap  <C-PageDown> <C-W>w
+:vnoremap  <C-PageUp> <C-W>W
 :inoremap <C-PageDown> <C-W>w
 :inoremap <C-PageUp> <C-W>W
+" }}}
 
-" Use jk for leaving insert mode, not escape
+" Use jk for leaving insert mode, not escape {{{
 :inoremap jk <esc>
+:vnoremap jk <esc>
 :inoremap <esc> <nop>
+:vnoremap <esc> <nop>
+" }}}
 
-" Disable arrow keys
+" Disable arrow keys {{{
 noremap <up> <nop>
 noremap <down> <nop>
 noremap <left> <nop>
 noremap <right> <nop>
+" }}}
 
-" Make j/k go up/down by screen lines, not file lines
+" Make j/k go up/down by screen lines, not file lines {{{
 noremap j gj
 noremap k gk
+" }}}
 
-" Move further left and right
+" Move further left and right {{{
 noremap H 0
 noremap L $
+" }}}
 
-" Make it easier to enter command mode
+" Make it easier to enter command mode {{{
 noremap ; :
+" }}}
 
-" Use the arrow keys for switching buffers
-noremap <right> :bnext<cr>
-noremap <left> :bprev<cr>
+" Operator pending helpers - next and last blocks {{{
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap il( :<c-u>normal! F)vi(<cr>
+onoremap an( :<c-u>normal! f(va(<cr>
+onoremap al( :<c-u>normal! F)va(<cr>
+onoremap in{ :<c-u>normal! f{vi{<cr>
+onoremap il{ :<c-u>normal! F}vi{<cr>
+onoremap an{ :<c-u>normal! f{va{<cr>
+onoremap al{ :<c-u>normal! F}va{<cr>
+onoremap in[ :<c-u>normal! f[vi[<cr>
+onoremap il[ :<c-u>normal! F]vi[<cr>
+onoremap an[ :<c-u>normal! f[va[<cr>
+onoremap al[ :<c-u>normal! F]va[<cr>
+" }}}
 
-" easily clear current search
+" VimRC specific mappings {{{
+augroup filetype_vim
+    au!
+    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim setlocal foldlevelstart=0
+augroup END
+" }}}
+
+" Markdown specific mappings {{{
+augroup filetype_markdown
+    au!
+    autocmd FileType markdown onoremap ih :<c-u>execute "normal! ?^\\(==\\+\\\|--\\+\\)$\r:nohlsearch\rkvg_"<cr>
+    autocmd FileType markdown onoremap ah :<c-u>execute "normal! ?^\\(==\\+\\\|--\\+\\)$\r:nohlsearch\rg_vk0"<cr>
+augroup END
+" }}}
+
+" easily clear current search {{{
 nnoremap <leader><space> :noh<cr>
+" }}}
 
-" Move lines up or down
+" Move lines up or down {{{
 nnoremap <leader>j ddp
 nnoremap <leader>k ddkkp
+" }}}
 
-" Uppercase the current word
+" Uppercase or put quotes around the current word {{{
 nnoremap <leader>u viwUe
-" Quotes around the current word
 nnoremap <leader>" viwh<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viwh<esc>a'<esc>hbi'<esc>lel
-" Quotes around the current selection
-vnoremap <leader>" o<esc>i"<esc>gvlo<esc>a"<esc>gvl
+" }}}
 
-" Open and source the vimrc file
+" Quotes around the current selection {{{
+vnoremap <leader>" o<esc>i"<esc>gvlo<esc>a"<esc>gvl
+" }}}
+
+" Open and source the vimrc file {{{
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>wgf
 nnoremap <leader>sv :source $MYVIMRC<cr>
+" }}}
 
-" Commenting in various file types
+" Commenting in various file types {{{
 augroup commenting
     au!
     autocmd FileType c nnoremap <buffer> <localleader>c I//
@@ -188,8 +223,9 @@ augroup commenting
     autocmd FileType was nnoremap <buffer> <localleader>c I'
     autocmd FileType vim nnoremap <buffer> <localleader>c I"
 augroup END
+" }}}
 
-" iff abbreviation in various file types
+" iff abbreviation in various file types {{{
 augroup iff
     au!
     autocmd FileType c iabbrev <buffer> iff if {}<left><left><left>
@@ -199,15 +235,18 @@ augroup iff
     autocmd FileType python :iabbrev <buffer> iff if:<left>
     autocmd FileType was :iabbrev <buffer> iff If Then<cr>End If<up><left><left><left><left>
 augroup END
+" }}}
 
-" Common abbreviations
+" Common abbreviations {{{
 iabbrev adn and
 iabbrev teh the
 iabbrev tehn then
 iabbrev waht what
+" }}}
 
-" Personal abbreviations
+" Personal abbreviations {{{
 iabbrev @@ rock@hymasfamily.org
 iabbrev ccopy Copyright 2011 Rock Hymas. All rights reserved.
 iabbrev wweb http://rockhymas.com
 iabbrev ssig --<cr>Rock Hymas<cr>rock@hymasfamily.org
+" }}}
