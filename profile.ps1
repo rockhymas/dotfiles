@@ -89,18 +89,15 @@ if ((Test-Path "$pwd\profile.ps1") -and ($scriptDirectory -ne $pwd)) {
 function e($file = "")
 {
     $servername = (hg root) 2>$null
-    write-host $servername
     $a = @()
     if ($servername -ne $null) {
         $a += '--servername'
         $a += $servername
-        write-host $a
     }
     if ($file -ne "") 
     {
         $a += '--remote-tab-silent'
         $a += $file
-        write-host $a
     }
     & 'gvim' $a
 }
