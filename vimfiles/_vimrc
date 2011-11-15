@@ -60,6 +60,7 @@ set listchars=tab:>-,trail:- " Show tabs as >--- and trailing spaces as -
 set relativenumber      " Do relative line numbering, rather than absolute
 set ruler               " show the cursor position all the time
 set showmode            " display non-command modes in command line
+set titlestring=%t%(\ %m%)%(\ %y%)\ :\ %{v:servername}   " title string shows filename, modified, filetype, and servername
 set ttyfast             " Do faster updating of the screen
 set wrap                " Wrap lines
 " }}}
