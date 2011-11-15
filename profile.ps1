@@ -88,16 +88,21 @@ if ((Test-Path "$pwd\profile.ps1") -and ($scriptDirectory -ne $pwd)) {
 
 function e($file = "")
 {
-    $servername = (hg root) 2>$null
     $a = @()
-    if ($servername -ne $null) {
-        $a += '--servername'
-        $a += $servername
-    }
-    if ($file -ne "") 
+    if ($file -ne "")
     {
+        $dir = get-item $file
+        if (($dir -ne $null) -and ($dir.Directory -ne $null)) {
+            $dir = $dir.Directory.FullName
+            $servername = (hg root --cwd $dir) 2>$null
+            if ($servername -ne $null) {
+                $a += '--servername'
+                $a += $servername
+            }
+        }
         $a += '--remote-tab-silent'
         $a += $file
     }
+    write-host $a
     & 'gvim' $a
 }
