@@ -72,6 +72,15 @@ set expandtab
 set tabstop=4
 " }}}
 
+" Tabbing per file {{{
+augroup tabbing
+    au!
+    autocmd FileType html set shiftwidth=2
+    autocmd FileType html set softtabstop=2
+    autocmd FileType html set tabstop=2
+augroup END
+" }}}
+
 " Store backup, swap, and undo files {{{
 set directory=~/vimfiles/temp/,c:/tmp,c:/temp
 set backupdir=~/vimfiles/temp/,c:/tmp,c:/temp
@@ -131,9 +140,7 @@ map Q gq
 
 " Use jk for leaving insert mode, not escape {{{
 :inoremap jk <esc>
-:vnoremap jk <esc>
 :inoremap <esc> <nop>
-:vnoremap <esc> <nop>
 " }}}
 
 " Disable arrow keys {{{
