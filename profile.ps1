@@ -91,10 +91,21 @@ function e($file = "")
     $a = @()
     if ($file -ne "")
     {
-        $dir = get-item $file
-        if (($dir -ne $null) -and ($dir.Directory -ne $null)) {
-            $dir = $dir.Directory.FullName
-            $servername = (hg root --cwd $dir) 2>$null
+        $dir = $null
+        if (Test-Path $file) {
+            $file = get-item $file
+            if (($file -ne $null) -and ($file.Directory -ne $null)) {
+                $dir = $file.Directory
+            }
+        }
+        else {
+            if(-not (Split-Path $file -IsAbsolute)) {
+                $file = join-path $pwd $file
+            }
+            $dir = new-object System.IO.DirectoryInfo -argumentlist ([System.IO.Path]::GetDirectoryName($file))
+        }
+        if ($dir -ne $null) {
+            $servername = (hg root --cwd $dir.FullName) 2>$null
             if ($servername -ne $null) {
                 $a += '--servername'
                 $a += $servername
