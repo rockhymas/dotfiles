@@ -60,6 +60,7 @@ set listchars=tab:>-,trail:- " Show tabs as >--- and trailing spaces as -
 set relativenumber      " Do relative line numbering, rather than absolute
 set ruler               " show the cursor position all the time
 set showmode            " display non-command modes in command line
+set titlestring=%t%(\ %m%)%(\ %y%)\ :\ %{v:servername}   " title string shows filename, modified, filetype, and servername
 set ttyfast             " Do faster updating of the screen
 set wrap                " Wrap lines
 " }}}
@@ -102,9 +103,6 @@ augroup vimrcEx
     " Show the cursor line for the current window only
     autocmd WinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
-
-    " Start gvim maximized
-    autocmd GUIEnter * simalt ~x
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler

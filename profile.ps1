@@ -88,16 +88,32 @@ if ((Test-Path "$pwd\profile.ps1") -and ($scriptDirectory -ne $pwd)) {
 
 function e($file = "")
 {
-    $servername = (hg root) 2>$null
     $a = @()
-    if ($servername -ne $null) {
-        $a += '--servername'
-        $a += $servername
-    }
-    if ($file -ne "") 
+    if ($file -ne "")
     {
+        $dir = $null
+        if (Test-Path $file) {
+            $file = get-item $file
+            if (($file -ne $null) -and ($file.Directory -ne $null)) {
+                $dir = $file.Directory
+            }
+        }
+        else {
+            if(-not (Split-Path $file -IsAbsolute)) {
+                $file = join-path $pwd $file
+            }
+            $dir = new-object System.IO.DirectoryInfo -argumentlist ([System.IO.Path]::GetDirectoryName($file))
+        }
+        if ($dir -ne $null) {
+            $servername = (hg root --cwd $dir.FullName) 2>$null
+            if ($servername -ne $null) {
+                $a += '--servername'
+                $a += $servername
+            }
+        }
         $a += '--remote-tab-silent'
         $a += $file
     }
+    write-host $a
     & 'gvim' $a
 }
