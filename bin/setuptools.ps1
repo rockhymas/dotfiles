@@ -20,5 +20,4 @@ Copy-Item $env:userprofile\bin\profileredirect.ps1 $profile
 & ".\consolasfont.reg"
 & ".\capslockisctrl.reg"
 
-[Diagnostics.Process]::Start("http://cache.gawker.com/assets/images/lifehacker/2009/02/Windows_7_Shortcuts_0.4_02.zip")
-[Diagnostics.Process]::Start("ftp://ftp.vim.org/pub/vim/pc/gvim72.exe")
+[Diagnostics.Process]::Start("http://www.vim.org/download.php#pc")
