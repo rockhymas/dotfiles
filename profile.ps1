@@ -28,29 +28,34 @@ function VsVars32
     }
 }
 
-function prompt
+function Write-HgInfo($path = $PWD.Path)
 {
-    hg prompt "{status|modified|unknown};{root};{root|basename};{bookmark};" | Set-Variable promptstr
-    $PWD.Path | Set-Variable path
+    hg prompt "{status|modified|unknown};{root};{root|basename};" | Set-Variable promptstr
+    svn info $path.Replace("\", "/") | Set-Variable svninfo
     if ($promptstr -ne $null) {
         $promptstrarray = $promptstr.Split(';')
         $status = $promptstrarray[0]
         $root = $promptstrarray[1]
         $rootbasename = $promptstrarray[2]
-        $bookmark = $promptstrarray[3]
         $rootdir = $root.Remove($root.LastIndexOf($rootbasename))
-        Write-Host ($rootdir) -nonewline -foregroundcolor Yellow
-        Write-Host ($path.Substring($rootdir.Length)) -nonewline -foregroundcolor Green
-        if ($bookmark -ne "") 
-        {
-          Write-Host " at " -nonewline -foregroundcolor Yellow
-          Write-Host ($bookmark) -nonewline -foregroundcolor Green
-        }
-        Write-Host "$status" -foregroundcolor Yellow
+    }
+    elseif ($svninfo -ne $null) {
+        $root = $svninfo[1].split(":", 2)[1].Trim()
+        $rootbasename = $root.Substring($root.LastIndexOf("\") + 1)
+        $rootdir = $root.Remove($root.LastIndexOf($rootbasename))
     }
     else {
-        Write-Host ($path) -foregroundcolor Yellow
+        $rootdir = $path
+        $status = ""
     }
+    Write-Host $rootdir -nonewline -foregroundcolor Yellow
+    Write-Host $path.Substring($rootdir.Length) -nonewline -foregroundcolor Green
+    Write-Host "$status" -foregroundcolor Yellow
+}
+
+function prompt
+{
+    Write-HgInfo
     Write-Host ('>') -nonewline -foregroundcolor Yellow
     return " "
 }
