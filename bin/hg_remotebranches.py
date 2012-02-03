@@ -198,3 +198,4 @@ def pushed(repo, subset, x):
 if revset is not None:
     revset.symbols.update({'upstream': upstream,
                            'pushed': pushed})
+
