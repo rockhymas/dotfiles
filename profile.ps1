@@ -11,6 +11,11 @@ function ta-db
     runas /noprofile /netonly /user:trackabout\rhymas "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
 }
 
+function prax-db
+{
+    runas /noprofile /netonly /user:praxair-usa\USASXT8 "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
+}
+
 function VsVars32
 {
     foreach ($version in "10.0", "9.0", "8.0") {
