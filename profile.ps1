@@ -6,9 +6,40 @@ function Get-Batchfile ($file) {
     }
 }
 
+function mw-vpn
+{
+    rasdial MetroPlex trackabout *
+}
+
+function prax-vpn
+{
+    rasdial Praxair praxair-usa\USASXT8 *
+    route add 167.22.144.0 mask 255.255.255.0 10.32.244.1
+    route add 167.22.144.0 mask 255.255.255.0 10.32.245.1
+    route add 167.22.145.0 mask 255.255.255.0 10.32.244.1
+    route add 167.22.145.0 mask 255.255.255.0 10.32.245.1
+    route add 167.22.148.0 mask 255.255.255.0 10.32.244.1
+    route add 167.22.148.0 mask 255.255.255.0 10.32.245.1
+    route add 10.172.3.0  mask 255.255.255.0 10.32.244.1
+    route add 10.172.3.0  mask 255.255.255.0 10.32.245.1
+    route add 167.22.144.0 mask 255.255.255.0 10.40.244.1
+    route add 167.22.144.0 mask 255.255.255.0 10.40.245.1
+    route add 167.22.145.0 mask 255.255.255.0 10.40.244.1
+    route add 167.22.145.0 mask 255.255.255.0 10.40.245.1
+    route add 167.22.148.0 mask 255.255.255.0 10.40.244.1
+    route add 167.22.148.0 mask 255.255.255.0 10.40.245.1
+    route add 10.172.3.0  mask 255.255.255.0 10.40.244.1
+    route add 10.172.3.0  mask 255.255.255.0 10.40.245.1
+}
+
 function ta-db
 {
     runas /noprofile /netonly /user:trackabout\rhymas "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
+}
+
+function ta-ps
+{
+    runas /noprofile /netonly /user:TRACKABOUT\rhymas "c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe"
 }
 
 function AddSqlServerProvider
