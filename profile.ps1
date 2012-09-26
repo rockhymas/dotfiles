@@ -6,30 +6,82 @@ function Get-Batchfile ($file) {
     }
 }
 
-function mw-vpn
+function vpn($vpn)
 {
-    rasdial MetroPlex trackabout *
+    switch ($vpn)
+    {
+        "prax" 
+        {
+            mw-vpn disconnect
+            lw-vpn disconnect
+            prax-vpn
+        }
+        "mw" 
+        {
+            lw-vpn disconnect
+            prax-vpn disconnect
+            mw-vpn
+        }
+        "lw"
+        {
+            mw-vpn disconnect
+            prax-vpn disconnect
+            lw-vpn
+        }
+        default { echo "unknown vpn" }
+    }
 }
 
-function prax-vpn
+function mw-vpn($disconnect = $false)
 {
-    rasdial Praxair praxair-usa\USASXT8 *
-    route add 167.22.144.0 mask 255.255.255.0 10.32.244.1
-    route add 167.22.144.0 mask 255.255.255.0 10.32.245.1
-    route add 167.22.145.0 mask 255.255.255.0 10.32.244.1
-    route add 167.22.145.0 mask 255.255.255.0 10.32.245.1
-    route add 167.22.148.0 mask 255.255.255.0 10.32.244.1
-    route add 167.22.148.0 mask 255.255.255.0 10.32.245.1
-    route add 10.172.3.0  mask 255.255.255.0 10.32.244.1
-    route add 10.172.3.0  mask 255.255.255.0 10.32.245.1
-    route add 167.22.144.0 mask 255.255.255.0 10.40.244.1
-    route add 167.22.144.0 mask 255.255.255.0 10.40.245.1
-    route add 167.22.145.0 mask 255.255.255.0 10.40.244.1
-    route add 167.22.145.0 mask 255.255.255.0 10.40.245.1
-    route add 167.22.148.0 mask 255.255.255.0 10.40.244.1
-    route add 167.22.148.0 mask 255.255.255.0 10.40.245.1
-    route add 10.172.3.0  mask 255.255.255.0 10.40.244.1
-    route add 10.172.3.0  mask 255.255.255.0 10.40.245.1
+    if ($disconnect)
+    {
+        rasdial MetroPlex /disconnect
+    }
+    else
+    {
+        rasdial MetroPlex trackabout *
+    }
+}
+
+function prax-vpn($disconnect = $false)
+{
+    if ($disconnect)
+    {
+        rasdial Praxair /disconnect
+    }
+    else
+    {
+        rasdial Praxair praxair-usa\USASXT8 *
+        route add 167.22.144.0 mask 255.255.255.0 10.32.244.1
+        route add 167.22.144.0 mask 255.255.255.0 10.32.245.1
+        route add 167.22.145.0 mask 255.255.255.0 10.32.244.1
+        route add 167.22.145.0 mask 255.255.255.0 10.32.245.1
+        route add 167.22.148.0 mask 255.255.255.0 10.32.244.1
+        route add 167.22.148.0 mask 255.255.255.0 10.32.245.1
+        route add 10.172.3.0  mask 255.255.255.0 10.32.244.1
+        route add 10.172.3.0  mask 255.255.255.0 10.32.245.1
+        route add 167.22.144.0 mask 255.255.255.0 10.40.244.1
+        route add 167.22.144.0 mask 255.255.255.0 10.40.245.1
+        route add 167.22.145.0 mask 255.255.255.0 10.40.244.1
+        route add 167.22.145.0 mask 255.255.255.0 10.40.245.1
+        route add 167.22.148.0 mask 255.255.255.0 10.40.244.1
+        route add 167.22.148.0 mask 255.255.255.0 10.40.245.1
+        route add 10.172.3.0  mask 255.255.255.0 10.40.244.1
+        route add 10.172.3.0  mask 255.255.255.0 10.40.245.1
+    }
+}
+
+function lw-vpn($disconnect = $false)
+{
+    if ($disconnect)
+    {
+        & 'C:\Program Files (x86)\Cisco Systems\VPN Client\vpnclient.exe' disconnect
+    }
+    else
+    {
+        & 'C:\Program Files (x86)\Cisco Systems\VPN Client\vpnclient.exe' connect "Logicworks VPN" cliauth
+    }
 }
 
 function ta-db
@@ -37,55 +89,14 @@ function ta-db
     runas /noprofile /netonly /user:trackabout\rhymas "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
 }
 
-function ta-ps
-{
-    runas /noprofile /netonly /user:TRACKABOUT\rhymas "c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe"
-}
-
-function AddSqlServerProvider
-{
-    #
-    # Add the SQL Server Provider.
-    #
-
-    $ErrorActionPreference = "Stop"
-
-    $sqlpsreg="HKLM:\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.SqlServer.Management.PowerShell.sqlps"
-
-    if (Get-ChildItem $sqlpsreg -ErrorAction "SilentlyContinue")
-    {
-        throw "SQL Server Provider for Windows PowerShell is not installed."
-    }
-    else
-    {
-        $item = Get-ItemProperty $sqlpsreg
-        $sqlpsPath = [System.IO.Path]::GetDirectoryName($item.Path)
-    }
-
-
-    #
-    # Set mandatory variables for the SQL Server provider
-    #
-    Set-Variable -scope Global -name SqlServerMaximumChildItems -Value 0
-    Set-Variable -scope Global -name SqlServerConnectionTimeout -Value 30
-    Set-Variable -scope Global -name SqlServerIncludeSystemObjects -Value $false
-    Set-Variable -scope Global -name SqlServerMaximumTabCompletion -Value 1000
-
-    #
-    # Load the snapins, type data, format data
-    #
-    Push-Location
-    cd $sqlpsPath
-    Add-PSSnapin SqlServerCmdletSnapin100
-    Add-PSSnapin SqlServerProviderSnapin100
-    Update-TypeData -PrependPath SQLProvider.Types.ps1xml 
-    update-FormatData -prependpath SQLProvider.Format.ps1xml 
-    Pop-Location
-}
-
 function prax-db
 {
     runas /noprofile /netonly /user:praxair-usa\USASXT8 "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
+}
+
+function ta-ps
+{
+    runas /noprofile /netonly /user:TRACKABOUT\rhymas "c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe"
 }
 
 function VsVars32
