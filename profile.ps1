@@ -91,7 +91,7 @@ function ta-db
 
 function prax-db
 {
-    runas /noprofile /netonly /user:praxair-usa\USASXT8 "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
+    runas /noprofile /netonly /user:praxair-usa\USAXNTS1190 "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
 }
 
 function ta-ps
