@@ -89,9 +89,14 @@ function ta-db
     runas /noprofile /netonly /user:trackabout\rhymas "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
 }
 
-function prax-db
+function prax-db($network)
 {
-    runas /noprofile /netonly /user:praxair-usa\USAXNTS1190 "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
+    runas /noprofile /netonly /user:praxair-$network\USAXNTS1190 "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
+}
+
+function prax-ps($network)
+{
+    runas /noprofile /netonly /user:praxair-$network\USAXNTS1190  "c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe"
 }
 
 function ta-ps
