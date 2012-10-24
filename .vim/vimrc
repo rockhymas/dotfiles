@@ -1,8 +1,15 @@
 " Copyright 2011 Rock Hymas. All rights reserved.
 
-" Pathogen bundle setup {{{
-filetype off
-call pathogen#runtime_append_all_bundles()
+" Make vim use the same vimfiles directory across OS's {{{
+set rtp+=~/.vim/
+" }}}
+
+" Setup Vundle {{{
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'git://git.wincent.com/command-t.git'
 " }}}
 
 " Set mapleader for all following mappings {{{

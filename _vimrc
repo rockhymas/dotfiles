@@ -1,1 +1,2 @@
-source $HOME/vimfiles/_vimrc
+" Just use the standard vimrc file name
+source ~/.vimrc
