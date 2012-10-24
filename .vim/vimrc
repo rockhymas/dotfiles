@@ -10,6 +10,7 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'PProvost/vim-ps1'
 " }}}
 
 " Set mapleader for all following mappings {{{
