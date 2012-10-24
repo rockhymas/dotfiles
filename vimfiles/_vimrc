@@ -10,8 +10,6 @@ let mapleader = ","
 " }}}
 
 " Make it ViM on Windows {{{
-set nocompatible        " This must be first, because it changes other options as a side effect.
-
 source $VIMRUNTIME/mswin.vim
 
 " In many terminal emulators the mouse works just fine, thus enable it.
@@ -136,11 +134,6 @@ map Q gq
 :inoremap <C-PageUp> <C-W>W
 " }}}
 
-" Use jk for leaving insert mode, not escape {{{
-:inoremap jk <esc>
-:inoremap <esc> <nop>
-" }}}
-
 " Disable arrow keys {{{
 noremap <up> <nop>
 noremap <down> <nop>
@@ -210,6 +203,7 @@ nnoremap <leader>' viwh<esc>a'<esc>hbi'<esc>lel
 
 " Quotes around the current selection {{{
 vnoremap <leader>" o<esc>i"<esc>gvlo<esc>a"<esc>gvl
+vnoremap <leader>' o<esc>i'<esc>gvlo<esc>a'<esc>gvl
 " }}}
 
 " Open and source the vimrc file {{{
@@ -251,7 +245,7 @@ iabbrev waht what
 
 " Personal abbreviations {{{
 iabbrev @@ rock@hymasfamily.org
-iabbrev ccopy Copyright 2011 Rock Hymas. All rights reserved.
+iabbrev ccopy Copyright 2012 Rock Hymas. All rights reserved.
 iabbrev wweb http://rockhymas.com
 iabbrev ssig --<cr>Rock Hymas<cr>rock@hymasfamily.org
 " }}}
