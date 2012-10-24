@@ -1,32 +1,3 @@
 syntax: glob
 
 *
-*~
-*.swp
-*.pyc
-*.pyo
-.*
-_viminf*
-Mercurial.ini
-mercurial.ini
-Mercurial-kiln.ini
-NTUSER.*
-ntuser.*
-
-vimfiles/undo
-_hgcookies/*
-_hgkiln
-
-keys/*
-AppData/*
-Documents/*
-Pictures/*
-Music/*
-Downloads/*
-Favorites/*
-Contacts/*
-Desktop/*
-Saved Games/*
-Searches/*
-Videos/*
-Links/*
