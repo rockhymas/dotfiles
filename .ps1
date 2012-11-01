@@ -6,104 +6,6 @@ function Get-Batchfile ($file) {
     }
 }
 
-function vpn($vpn)
-{
-    switch ($vpn)
-    {
-        "prax" 
-        {
-            mw-vpn disconnect
-            lw-vpn disconnect
-            prax-vpn
-        }
-        "mw" 
-        {
-            lw-vpn disconnect
-            prax-vpn disconnect
-            mw-vpn
-        }
-        "lw"
-        {
-            mw-vpn disconnect
-            prax-vpn disconnect
-            lw-vpn
-        }
-        default { echo "unknown vpn" }
-    }
-}
-
-function mw-vpn($disconnect = $false)
-{
-    if ($disconnect)
-    {
-        rasdial MetroPlex /disconnect
-    }
-    else
-    {
-        rasdial MetroPlex trackabout *
-    }
-}
-
-function prax-vpn($disconnect = $false)
-{
-    if ($disconnect)
-    {
-        rasdial Praxair /disconnect
-    }
-    else
-    {
-        rasdial Praxair praxair-usa\USASXT8 *
-        route add 167.22.144.0 mask 255.255.255.0 10.32.244.1
-        route add 167.22.144.0 mask 255.255.255.0 10.32.245.1
-        route add 167.22.145.0 mask 255.255.255.0 10.32.244.1
-        route add 167.22.145.0 mask 255.255.255.0 10.32.245.1
-        route add 167.22.148.0 mask 255.255.255.0 10.32.244.1
-        route add 167.22.148.0 mask 255.255.255.0 10.32.245.1
-        route add 10.172.3.0  mask 255.255.255.0 10.32.244.1
-        route add 10.172.3.0  mask 255.255.255.0 10.32.245.1
-        route add 167.22.144.0 mask 255.255.255.0 10.40.244.1
-        route add 167.22.144.0 mask 255.255.255.0 10.40.245.1
-        route add 167.22.145.0 mask 255.255.255.0 10.40.244.1
-        route add 167.22.145.0 mask 255.255.255.0 10.40.245.1
-        route add 167.22.148.0 mask 255.255.255.0 10.40.244.1
-        route add 167.22.148.0 mask 255.255.255.0 10.40.245.1
-        route add 10.172.3.0  mask 255.255.255.0 10.40.244.1
-        route add 10.172.3.0  mask 255.255.255.0 10.40.245.1
-    }
-}
-
-function lw-vpn($disconnect = $false)
-{
-    if ($disconnect)
-    {
-        & 'C:\Program Files (x86)\Cisco Systems\VPN Client\vpnclient.exe' disconnect
-    }
-    else
-    {
-        & 'C:\Program Files (x86)\Cisco Systems\VPN Client\vpnclient.exe' connect "Logicworks VPN" cliauth
-    }
-}
-
-function ta-db
-{
-    runas /noprofile /netonly /user:trackabout\rhymas "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
-}
-
-function prax-db($network)
-{
-    runas /noprofile /netonly /user:praxair-$network\USAXNTS1190 "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe"
-}
-
-function prax-ps($network)
-{
-    runas /noprofile /netonly /user:praxair-$network\USAXNTS1190  "c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe"
-}
-
-function ta-ps
-{
-    runas /noprofile /netonly /user:TRACKABOUT\rhymas "c:\windows\system32\WindowsPowerShell\v1.0\powershell.exe"
-}
-
 function VsVars32
 {
     foreach ($version in "10.0", "9.0", "8.0") {
@@ -168,8 +70,6 @@ function cd.. ([string]$path = ".")
     Set-Location "..\$path"
 }
 
-Set-Alias ".." "cd.."
-
 function elevate-process
 {
     $file, [string]$arguments = $args;
@@ -178,15 +78,6 @@ function elevate-process
     $psi.Verb = "runas";
     $psi.WorkingDirectory = get-location;
     [System.Diagnostics.Process]::Start($psi);
-}
-
-
-VsVars32
-[System.Console]::Title = "Console"
-
-$scriptDirectory = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
-if ((Test-Path "$pwd\profile.ps1") -and ($scriptDirectory -ne $pwd)) {
-    . $pwd\profile.ps1
 }
 
 function e($file = "")
@@ -219,4 +110,12 @@ function e($file = "")
     }
     write-host $a
     & 'gvim' $a
+}
+
+Set-Alias ".." "cd.."
+VsVars32
+[System.Console]::Title = "Console"
+
+if (Test-Path "~\local.ps1") {
+    . ~\local.ps1
 }
