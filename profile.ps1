@@ -214,7 +214,7 @@ function e($file = "")
                 $a += $servername
             }
         }
-        $a += '--remote-tab-silent'
+        $a += '--remote-silent'
         $a += $file
     }
     write-host $a

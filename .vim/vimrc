@@ -9,8 +9,8 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'PProvost/vim-ps1'
+Bundle 'bufexplorer.zip'
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_cmd = 'CtrlPMixed'
 " }}}
