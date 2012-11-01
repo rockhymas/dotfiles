@@ -11,6 +11,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'PProvost/vim-ps1'
+Bundle 'kien/ctrlp.vim'
+let g:ctrlp_cmd = 'CtrlPMixed'
 " }}}
 
 " Set mapleader for all following mappings {{{
