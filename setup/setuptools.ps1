@@ -18,6 +18,6 @@ if (!(Test-Path $ahklnk))
 {
     $objShell = New-Object -ComObject ("WScript.Shell")
     $objShortCut = $objShell.CreateShortcut($ahklnk)
-    $objShortCut.TargetPath = $env:USERPROFILE + ".ahk"
+    $objShortCut.TargetPath = $env:USERPROFILE + "\.ahk"
     $objShortCut.Save()
 }
