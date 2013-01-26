@@ -31,7 +31,6 @@ function VsVars32
 function Write-HgInfo($path = $PWD.Path)
 {
     hg prompt "{status|modified|unknown};{root};{root|basename};" | Set-Variable promptstr
-    svn info $path.Replace("\", "/") | Set-Variable svninfo
     if ($promptstr -ne $null) {
         $promptstrarray = $promptstr.Split(';')
         $status = $promptstrarray[0]
@@ -39,14 +38,19 @@ function Write-HgInfo($path = $PWD.Path)
         $rootbasename = $promptstrarray[2]
         $rootdir = $root.Remove($root.LastIndexOf($rootbasename))
     }
-    elseif ($svninfo -ne $null) {
-        $root = $svninfo[1].split(":", 2)[1].Trim()
-        $rootbasename = $root.Substring($root.LastIndexOf("\") + 1)
-        $rootdir = $root.Remove($root.LastIndexOf($rootbasename))
-    }
     else {
-        $rootdir = $path
-        $status = ""
+        try {
+            svn info $path.Replace("\", "/") | Set-Variable svninfo
+        } catch [System.Management.Automation.CommandNotFoundException] {}
+        if ($svninfo -ne $null) {
+            $root = $svninfo[1].split(":", 2)[1].Trim()
+            $rootbasename = $root.Substring($root.LastIndexOf("\") + 1)
+            $rootdir = $root.Remove($root.LastIndexOf($rootbasename))
+        }
+        else {
+            $rootdir = $path
+            $status = ""
+        }
     }
     Write-Host $rootdir -nonewline -foregroundcolor Yellow
     Write-Host $path.Substring($rootdir.Length) -nonewline -foregroundcolor Green
