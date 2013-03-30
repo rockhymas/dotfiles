@@ -13,6 +13,8 @@ if (!(Test-Path $profile)) {
 reg import "$(Split-Path $myinvocation.mycommand.path)\consolasfont.reg"
 reg import "$(Split-Path $myinvocation.mycommand.path)\capslockisctrl.reg"
 
+Set-ItemProperty -Path HKCU:\Software\Microsoft\VisualStudio\11.0\General -Name SuppressUppercaseConversion -Type DWord -Value 1
+
 $ahklnk = $env:USERPROFILE + "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\.ahk.lnk"
 if (!(Test-Path $ahklnk))
 {
