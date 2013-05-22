@@ -28,42 +28,6 @@ function VsVars32
     }
 }
 
-function Write-HgInfo($path = $PWD.Path)
-{
-    hg prompt "{status|modified|unknown};{root};{root|basename};" | Set-Variable promptstr
-    if ($promptstr -ne $null) {
-        $promptstrarray = $promptstr.Split(';')
-        $status = $promptstrarray[0]
-        $root = $promptstrarray[1]
-        $rootbasename = $promptstrarray[2]
-        $rootdir = $root.Remove($root.LastIndexOf($rootbasename))
-    }
-    else {
-        try {
-            svn info $path.Replace("\", "/") | Set-Variable svninfo
-        } catch [System.Management.Automation.CommandNotFoundException] {}
-        if ($svninfo -ne $null) {
-            $root = $svninfo[1].split(":", 2)[1].Trim()
-            $rootbasename = $root.Substring($root.LastIndexOf("\") + 1)
-            $rootdir = $root.Remove($root.LastIndexOf($rootbasename))
-        }
-        else {
-            $rootdir = $path
-            $status = ""
-        }
-    }
-    Write-Host $rootdir -nonewline -foregroundcolor Yellow
-    Write-Host $path.Substring($rootdir.Length) -nonewline -foregroundcolor Green
-    Write-Host "$status" -foregroundcolor Yellow
-}
-
-function prompt
-{
-    Write-HgInfo
-    Write-Host ('>') -nonewline -foregroundcolor Yellow
-    return " "
-}
-
 function which($name = "")
 {
     where.exe $name
@@ -73,15 +37,21 @@ function cd.. ([string]$path = ".")
 {
     Set-Location "..\$path"
 }
+Set-Alias ".." "cd.."
 
-function elevate-process
-{
-    $file, [string]$arguments = $args;
-    $psi = new-object System.Diagnostics.ProcessStartInfo $file;
-    $psi.Arguments = $arguments;
-    $psi.Verb = "runas";
-    $psi.WorkingDirectory = get-location;
-    [System.Diagnostics.Process]::Start($psi);
+function Invoke-Admin() {
+    param ( [string]$program = $(throw "Please specify a program" ),
+            [string]$argumentString = "",
+            [switch]$waitForExit )
+
+    $psi = new-object "Diagnostics.ProcessStartInfo"
+    $psi.FileName = $program 
+    $psi.Arguments = $argumentString
+    $psi.Verb = "runas"
+    $proc = [Diagnostics.Process]::Start($psi)
+    if ( $waitForExit ) {
+        $proc.WaitForExit();
+    }
 }
 
 function e($file = "")
@@ -116,9 +86,55 @@ function e($file = "")
     & 'gvim' $a
 }
 
-Set-Alias ".." "cd.."
+function Write-HgStatus($path = $PWD.Path)
+{
+    hg prompt "{status|modified|unknown}" | Set-Variable promptstr
+    if ($promptstr -ne $null) {
+        $status = $promptstr
+        Write-Host " [" -foregroundcolor Yellow -nonewline
+        Write-Host "$status" -foregroundcolor Magenta -nonewline
+        Write-Host "]" -foregroundcolor Yellow -nonewline
+    }
+}
+
+
 VsVars32
 [System.Console]::Title = "Console"
+
+#
+# Git prompt and posh-git
+#
+
+. $env:LOCALAPPDATA\GitHub\shell.ps1
+
+# Load posh-git module
+Push-Location $env:github_posh_git
+Import-Module .\posh-git
+Pop-Location
+
+# Set up a simple prompt, adding the git prompt parts inside git repos
+function prompt {
+    $realLASTEXITCODE = $LASTEXITCODE
+
+    # Reset color, which can be messed up by Enable-GitColors
+    $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
+
+    Write-Host($pwd.ProviderPath) -nonewline
+
+    Write-VcsStatus
+
+    Write-Host(">") -nonewline
+
+    $global:LASTEXITCODE = $realLASTEXITCODE
+    $Host.UI.RawUI.ForegroundColor = "Gray"
+
+    return " "
+}
+
+$VcsPromptStatuses += {Write-HgStatus}
+$GitPromptSettings.DefaultForegroundColor = "Yellow"
+Enable-GitColors
+Start-SshAgent -Quiet
 
 if (Test-Path "~\local.ps1") {
     . ~\local.ps1
