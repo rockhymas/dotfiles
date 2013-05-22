@@ -88,7 +88,7 @@ function e($file = "")
 
 function Write-HgStatus($path = $PWD.Path)
 {
-    hg prompt "{status|modified|unknown}" | Set-Variable promptstr
+    hg prompt "{branch} {status|modified|unknown}" | Set-Variable promptstr
     if ($promptstr -ne $null) {
         $status = $promptstr
         Write-Host " [" -foregroundcolor Yellow -nonewline
