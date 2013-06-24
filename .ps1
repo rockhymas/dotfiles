@@ -44,8 +44,9 @@ function Invoke-Admin() {
             [string]$argumentString = "",
             [switch]$waitForExit )
 
+    $fullpath = (dir $program).FullName
     $psi = new-object "Diagnostics.ProcessStartInfo"
-    $psi.FileName = $program 
+    $psi.FileName = $fullpath
     $psi.Arguments = $argumentString
     $psi.Verb = "runas"
     $proc = [Diagnostics.Process]::Start($psi)
