@@ -15,11 +15,11 @@ reg import "$(Split-Path $myinvocation.mycommand.path)\capslockisctrl.reg"
 
 Set-ItemProperty -Path HKCU:\Software\Microsoft\VisualStudio\11.0\General -Name SuppressUppercaseConversion -Type DWord -Value 1
 
-$ahklnk = $env:USERPROFILE + "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\.ahk.lnk"
-if (!(Test-Path $ahklnk))
-{
-    $objShell = New-Object -ComObject ("WScript.Shell")
-    $objShortCut = $objShell.CreateShortcut($ahklnk)
-    $objShortCut.TargetPath = $env:USERPROFILE + "\.ahk"
-    $objShortCut.Save()
-}
+#$ahklnk = $env:USERPROFILE + "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\.ahk.lnk"
+#if (!(Test-Path $ahklnk))
+#{
+#    $objShell = New-Object -ComObject ("WScript.Shell")
+#    $objShortCut = $objShell.CreateShortcut($ahklnk)
+#    $objShortCut.TargetPath = $env:USERPROFILE + "\.ahk"
+#    $objShortCut.Save()
+#}
