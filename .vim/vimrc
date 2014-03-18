@@ -5,14 +5,14 @@ set rtp+=~/.vim/
 " }}}
 
 " Setup Vundle {{{
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" set rtp+=~/.vim/bundle/vundle/
+" call vundle#rc()
 
-Bundle 'gmarik/vundle'
-Bundle 'PProvost/vim-ps1'
-Bundle 'bufexplorer.zip'
-Bundle 'kien/ctrlp.vim'
-let g:ctrlp_cmd = 'CtrlPMixed'
+" Bundle 'gmarik/vundle'
+" Bundle 'PProvost/vim-ps1'
+" Bundle 'bufexplorer.zip'
+" Bundle 'kien/ctrlp.vim'
+" let g:ctrlp_cmd = 'CtrlPMixed'
 " }}}
 
 " Set mapleader for all following mappings {{{
@@ -91,9 +91,9 @@ augroup END
 " }}}
 
 " Store backup, swap, and undo files {{{
-set directory=~/vimfiles/temp/,c:/tmp,c:/temp
-set backupdir=~/vimfiles/temp/,c:/tmp,c:/temp
-set undodir=~/vimfiles/undo
+set directory=~/.vim/temp/,c:/tmp,c:/temp
+set backupdir=~/.vim/temp/,c:/tmp,c:/temp
+set undodir=~/.vim/undo
 " }}}
 
 " Gui options {{{
