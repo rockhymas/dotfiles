@@ -8,7 +8,7 @@ function Get-Batchfile ($file) {
 
 function VsVars32
 {
-    foreach ($version in "10.0", "9.0", "8.0") {
+    foreach ($version in "12.0", "11.0", "10.0", "9.0", "8.0") {
 
         $key = "HKLM:SOFTWARE\Microsoft\VisualStudio\" + $version
         if ((Test-Path $key) -eq $true) {
@@ -22,6 +22,7 @@ function VsVars32
                 $VsToolsDir = [System.IO.Path]::Combine($VsToolsDir, "Tools")
                 $BatchFile = [System.IO.Path]::Combine($VsToolsDir, "vsvars32.bat")
                 Get-Batchfile $BatchFile
+                echo "Using VS tools version $version"
                 break;
             }
         }
@@ -87,56 +88,10 @@ function e($file = "")
     & 'gvim' $a
 }
 
-function Write-HgStatus($path = $PWD.Path)
-{
-    hg prompt "{branch}{ {status|modified|unknown}}" | Set-Variable promptstr
-    if ($promptstr -ne $null) {
-        $status = $promptstr
-        Write-Host " [" -foregroundcolor Yellow -nonewline
-        Write-Host "$status" -foregroundcolor Magenta -nonewline
-        Write-Host "]" -foregroundcolor Yellow -nonewline
-    }
-}
-
 
 VsVars32
 [System.Console]::Title = "Console"
-
-#
-# Git prompt and posh-git
-#
-
-. $env:LOCALAPPDATA\GitHub\shell.ps1
-
-# Load posh-git module
-Push-Location $env:github_posh_git
-Import-Module .\posh-git
-Pop-Location
-
-# Set up a simple prompt, adding the git prompt parts inside git repos
-function prompt {
-    $realLASTEXITCODE = $LASTEXITCODE
-
-    # Reset color, which can be messed up by Enable-GitColors
-    $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
-
-    Write-Host($pwd.ProviderPath) -nonewline
-
-    Write-VcsStatus
-
-    Write-Host(">") -nonewline
-
-    $global:LASTEXITCODE = $realLASTEXITCODE
-    $Host.UI.RawUI.ForegroundColor = "Gray"
-
-    return " "
-}
-
-$VcsPromptStatuses += {Write-HgStatus}
-$GitPromptSettings.DefaultForegroundColor = "Yellow"
-Enable-GitColors
-Start-SshAgent -Quiet
-
+$env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 if (Test-Path "~\local.ps1") {
     . ~\local.ps1
 }
