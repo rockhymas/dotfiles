@@ -8,7 +8,7 @@ function Get-Batchfile ($file) {
 
 function VsVars32
 {
-    foreach ($version in "12.0", "11.0", "10.0", "9.0", "8.0") {
+    foreach ($version in "14.0", "12.0", "11.0", "10.0", "9.0", "8.0") {
 
         $key = "HKLM:SOFTWARE\Microsoft\VisualStudio\" + $version
         if ((Test-Path $key) -eq $true) {
@@ -55,39 +55,6 @@ function Invoke-Admin() {
         $proc.WaitForExit();
     }
 }
-
-function e($file = "")
-{
-    $a = @()
-    if ($file -ne "")
-    {
-        $dir = $null
-        if (Test-Path $file) {
-            $file = get-item $file
-            if (($file -ne $null) -and ($file.Directory -ne $null)) {
-                $dir = $file.Directory
-            }
-        }
-        else {
-            if(-not (Split-Path $file -IsAbsolute)) {
-                $file = join-path $pwd $file
-            }
-            $dir = new-object System.IO.DirectoryInfo -argumentlist ([System.IO.Path]::GetDirectoryName($file))
-        }
-        if ($dir -ne $null) {
-            $servername = (hg root --cwd $dir.FullName) 2>$null
-            if ($servername -ne $null) {
-                $a += '--servername'
-                $a += $servername
-            }
-        }
-        $a += '--remote-silent'
-        $a += $file
-    }
-    write-host $a
-    & 'gvim' $a
-}
-
 
 VsVars32
 [System.Console]::Title = "Console"
