@@ -8,7 +8,13 @@ function Get-Batchfile ($file) {
 
 function VsVars32
 {
-    foreach ($version in "14.0", "12.0", "11.0", "10.0", "9.0", "8.0") {
+    if ((Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools\vsdevcmd.bat") -eq $true) {
+        Get-BatchFile "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools\vsdevcmd.bat"
+        echo "Using VS tools version 15.0"
+        return;
+    }
+
+    foreach ($version in "15.0", "14.0", "12.0", "11.0", "10.0", "9.0", "8.0") {
 
         $key = "HKLM:SOFTWARE\Microsoft\VisualStudio\" + $version
         if ((Test-Path $key) -eq $true) {
