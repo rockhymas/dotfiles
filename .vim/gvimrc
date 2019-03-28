@@ -1,5 +1,0 @@
-:set guifont=Consolas:h9:cANSI
-:set showtabline=1
-:set lines=150 columns=160
-winpos 0 0
-color wombat
