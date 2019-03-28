@@ -23,13 +23,15 @@ function VsVars32
             }
             if ((Test-Path $key) -eq $true) {
                 $VsKey = get-ItemProperty $key
-                $VsInstallPath = [System.IO.Path]::GetDirectoryName($VsKey.InstallDir)
-                $VsToolsDir = [System.IO.Path]::GetDirectoryName($VsInstallPath)
-                $VsToolsDir = [System.IO.Path]::Combine($VsToolsDir, "Tools")
-                $BatchFile = [System.IO.Path]::Combine($VsToolsDir, "vsvars32.bat")
-                Get-Batchfile $BatchFile
-                echo "Using VS tools version $version"
-                break;
+                if ($VsKey.InstallDir -ne $null) {
+                    $VsInstallPath = [System.IO.Path]::GetDirectoryName($VsKey.InstallDir)
+                    $VsToolsDir = [System.IO.Path]::GetDirectoryName($VsInstallPath)
+                    $VsToolsDir = [System.IO.Path]::Combine($VsToolsDir, "Tools")
+                    $BatchFile = [System.IO.Path]::Combine($VsToolsDir, "vsvars32.bat")
+                    Get-Batchfile $BatchFile
+                    echo "Using VS tools version $version"
+                    break;
+                }
             }
         }
     }
