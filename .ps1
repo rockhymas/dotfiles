@@ -8,9 +8,15 @@ function Get-Batchfile ($file) {
 
 function VsVars32
 {
+    if ((Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\vsdevcmd.bat") -eq $true) {
+        Get-BatchFile "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\vsdevcmd.bat"
+        echo "Using VS tools version 2019"
+        return;
+    }
+
     if ((Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools\vsdevcmd.bat") -eq $true) {
         Get-BatchFile "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools\vsdevcmd.bat"
-        echo "Using VS tools version 15.0"
+        echo "Using VS tools version 2017"
         return;
     }
 
