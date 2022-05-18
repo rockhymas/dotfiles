@@ -8,6 +8,7 @@
 	required = true
 [core]
 	editor = code --wait
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
 [diff]
 	tool = vscode
 [difftool "default-difftool"]
