@@ -73,7 +73,7 @@ function Invoke-Admin() {
 $env:VSCMD_SKIP_SENDTELEMETRY = 'No way'
 VsVars32
 [System.Console]::Title = "Console"
-$env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
+oh-my-posh init pwsh | Invoke-Expression
 if (Test-Path "~\local.ps1") {
     . ~\local.ps1
 }
