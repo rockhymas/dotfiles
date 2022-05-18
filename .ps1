@@ -73,7 +73,7 @@ function Invoke-Admin() {
 $env:VSCMD_SKIP_SENDTELEMETRY = 'No way'
 VsVars32
 [System.Console]::Title = "Console"
-oh-my-posh init pwsh | Invoke-Expression
+oh-my-posh init pwsh --config ~/.rock.omp.json | Invoke-Expression
 if (Test-Path "~\local.ps1") {
     . ~\local.ps1
 }
