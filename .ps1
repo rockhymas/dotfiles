@@ -8,6 +8,12 @@ function Get-Batchfile ($file) {
 
 function VsVars32
 {
+    if ((Test-Path "C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\vsdevcmd.bat") -eq $true) {
+        Get-BatchFile "C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\vsdevcmd.bat"
+        # add a message when this isn't the latest anymore
+        return;
+    }
+
     if ((Test-Path "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\vsdevcmd.bat") -eq $true) {
         Get-BatchFile "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\vsdevcmd.bat"
         echo "Using VS tools version 2019"
@@ -20,27 +26,7 @@ function VsVars32
         return;
     }
 
-    foreach ($version in "15.0", "14.0", "12.0", "11.0", "10.0", "9.0", "8.0") {
-
-        $key = "HKLM:SOFTWARE\Microsoft\VisualStudio\" + $version
-        if ((Test-Path $key) -eq $true) {
-            if ((get-itemproperty $key).InstallDir -eq $null) {
-                $key = "HKLM:SOFTWARE\Wow6432Node\Microsoft\VisualStudio\" + $version
-            }
-            if ((Test-Path $key) -eq $true) {
-                $VsKey = get-ItemProperty $key
-                if ($VsKey.InstallDir -ne $null) {
-                    $VsInstallPath = [System.IO.Path]::GetDirectoryName($VsKey.InstallDir)
-                    $VsToolsDir = [System.IO.Path]::GetDirectoryName($VsInstallPath)
-                    $VsToolsDir = [System.IO.Path]::Combine($VsToolsDir, "Tools")
-                    $BatchFile = [System.IO.Path]::Combine($VsToolsDir, "vsvars32.bat")
-                    Get-Batchfile $BatchFile
-                    echo "Using VS tools version $version"
-                    break;
-                }
-            }
-        }
-    }
+    echo "No VS tools version found"
 }
 
 function which($name = "")
